@@ -1,9 +1,11 @@
-import styles from './Board.module.scss';
+import { Pawn } from '../modules/pieces';
+import setUpBoard from '../modules/setUpBoard';
+import  './Board.scss';
 import TheFile from './TheFile';
 
 function Board() {
   return (
-   <div id={styles.Board}>
+   <div id="Board">
     <TheFile>A</TheFile>
     <TheFile>B</TheFile>
     <TheFile>C</TheFile>
@@ -15,19 +17,14 @@ function Board() {
    </div> 
   )
 }
-Board.pieces = {
-  Pawn: 1,
-  Bishop: 3,
-  Knight: 3,
-  Rook: 5,
-  Queen: 9,
-  King: 0
-}
 Board.putPiece = (piece, position) => {
 console.log(`a new ${piece} is being placed at ${position}`);
 }
 Board.movePiece = (piece, position) => {
   console.log(`moving ${piece} from OLD to ${position}`);
 }
+setUpBoard(Board);
+let RPawn = new Pawn(true);
+console.log(RPawn.getImg())
 
 export default Board

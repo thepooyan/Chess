@@ -1,6 +1,6 @@
 export default function TheFile(props) {
     return (
-        <div>
+        <div id={`${props.children}-File`}>
             <div id={`${props.children}${1}`}></div>
             <div id={`${props.children}${2}`}></div>
             <div id={`${props.children}${3}`}></div>
