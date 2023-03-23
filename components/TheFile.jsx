@@ -10,7 +10,14 @@ export default function TheFile(props) {
    let file7 = useRef(null); 
    let file8 = useRef(null); 
 
-   props.position['A1'] = file1;
+   props.position[`${props.children}1`] = file1;
+   props.position[`${props.children}2`] = file1;
+   props.position[`${props.children}3`] = file1;
+   props.position[`${props.children}4`] = file1;
+   props.position[`${props.children}5`] = file1;
+   props.position[`${props.children}6`] = file1;
+   props.position[`${props.children}7`] = file1;
+   props.position[`${props.children}8`] = file1;
     return (
         <div>
             <div id={`${props.children}${1}`} ref={file1}></div>
