@@ -1,8 +1,15 @@
 const imgFolder = `/Chess set themes/chessdotcom/`;
 
-class Piece {
-    constructor(isWhite = true) {
+export class Piece {
+    constructor(startingPos, {isWhite} = {isWhite: true}) {
+        this.startingPos = startingPos;
         this.isWhite = isWhite;
+    }
+    getImg() {
+        return this.imgAddress;
+    }
+    getStartingPos() {
+        return this.startingPos;
     }
 }
 
@@ -12,9 +19,7 @@ export class Pawn extends Piece {
         let baseName = `${this.isWhite?'w':'b'}p.png`;
         this.imgAddress = imgFolder + baseName;
     }
-    getImg() {
-        return this.imgAddress;
-    }
+
 }
 
 class Knight extends Piece { }
