@@ -1,9 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
+import Board from '../components/Board'
+import setUpBoard from '../modules/setUpBoard'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <Board />
   </React.StrictMode>,
 )
+setUpBoard(Board);
