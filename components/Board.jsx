@@ -1,9 +1,14 @@
+import { useEffect } from 'react';
 import setUpBoard from '../modules/setUpBoard';
 import './Board.scss';
 import TheFile from './TheFile';
 
 function Board() {
+
   Board.positions = {};
+  useEffect(()=>{
+    setUpBoard(Board)
+  })
 
   return (
     <div id="Board">
