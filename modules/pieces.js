@@ -20,6 +20,9 @@ export class Pawn extends Piece {
         this.imgAddress = imgFolder + baseName;
         this.currentPos.style.backgroundImage = `url("${this.imgAddress}")`;
     }
+    move(pos) {
+        console.log(this.currentPos.id, pos.id);
+    }
 }
 
 export class Knight extends Piece {
