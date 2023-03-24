@@ -1,15 +1,20 @@
 const imgFolder = `/Chess set themes/chessdotcom/`;
 
+function getAxies(pos) {
+    return {x:parseInt(pos[1]), y:pos[0]}
+}
+
 class Piece {
-    constructor(currentPos, { isWhite } = { isWhite: true }) {
-        this.currentPos = currentPos;
+    constructor(currentSquare, { isWhite } = { isWhite: true }) {
+        this.currentSquare = currentSquare;
         this.isWhite = isWhite;
+        this.pos = getAxies(currentSquare.id);
     }
     getImg() {
         return this.imgAddress;
     }
     getStartingPos() {
-        return this.currentPos;
+        return this.currentSquare;
     }
 }
 
@@ -18,10 +23,19 @@ export class Pawn extends Piece {
         super(...args);
         let baseName = `${this.isWhite ? 'w' : 'b'}p.png`;
         this.imgAddress = imgFolder + baseName;
-        this.currentPos.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
     }
     move(pos) {
-        console.log(this.currentPos.id, pos.id);
+        let destPos = getAxies(pos.id);
+        if (this.isWhite) {
+            if (this.pos.x + 1 === destPos.x) {
+                console.log('granted');
+            } else {
+                console.log('illigal move');
+            }
+        } else {
+
+        }
     }
 }
 
@@ -30,7 +44,7 @@ export class Knight extends Piece {
         super(...args);
         let baseName = `${this.isWhite ? 'w' : 'b'}n.png`;
         this.imgAddress = imgFolder + baseName;
-        this.currentPos.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
     }
 }
 
@@ -39,7 +53,7 @@ export class Bishop extends Piece {
         super(...args);
         let baseName = `${this.isWhite ? 'w' : 'b'}b.png`;
         this.imgAddress = imgFolder + baseName;
-        this.currentPos.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
     }
 }
 
@@ -48,7 +62,7 @@ export class Rook extends Piece {
         super(...args);
         let baseName = `${this.isWhite ? 'w' : 'b'}r.png`;
         this.imgAddress = imgFolder + baseName;
-        this.currentPos.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
     }
 }
 
@@ -57,7 +71,7 @@ export class Queen extends Piece {
         super(...args);
         let baseName = `${this.isWhite ? 'w' : 'b'}q.png`;
         this.imgAddress = imgFolder + baseName;
-        this.currentPos.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
     }
 }
 
@@ -66,6 +80,6 @@ export class King extends Piece {
         super(...args);
         let baseName = `${this.isWhite ? 'w' : 'b'}k.png`;
         this.imgAddress = imgFolder + baseName;
-        this.currentPos.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
     }
 }
