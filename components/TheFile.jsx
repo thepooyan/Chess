@@ -22,14 +22,14 @@ export default function TheFile(props) {
     })
     return (
         <div>
-            <div id={`${props.children}${1}`} ref={file1}></div>
-            <div id={`${props.children}${2}`} ref={file2}></div>
-            <div id={`${props.children}${3}`} ref={file3}></div>
-            <div id={`${props.children}${4}`} ref={file4}></div>
-            <div id={`${props.children}${5}`} ref={file5}></div>
-            <div id={`${props.children}${6}`} ref={file6}></div>
-            <div id={`${props.children}${7}`} ref={file7}></div>
             <div id={`${props.children}${8}`} ref={file8}></div>
+            <div id={`${props.children}${7}`} ref={file7}></div>
+            <div id={`${props.children}${6}`} ref={file6}></div>
+            <div id={`${props.children}${5}`} ref={file5}></div>
+            <div id={`${props.children}${4}`} ref={file4}></div>
+            <div id={`${props.children}${3}`} ref={file3}></div>
+            <div id={`${props.children}${2}`} ref={file2}></div>
+            <div id={`${props.children}${1}`} ref={file1}></div>
         </div>
     )
 }

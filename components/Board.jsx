@@ -12,14 +12,14 @@ function Board() {
 
   return (
     <div id="Board">
-      <TheFile position={Board.positions}>H</TheFile>
-      <TheFile position={Board.positions}>G</TheFile>
-      <TheFile position={Board.positions}>F</TheFile>
-      <TheFile position={Board.positions}>E</TheFile>
-      <TheFile position={Board.positions}>D</TheFile>
-      <TheFile position={Board.positions}>C</TheFile>
-      <TheFile position={Board.positions}>B</TheFile>
       <TheFile position={Board.positions}>A</TheFile>
+      <TheFile position={Board.positions}>B</TheFile>
+      <TheFile position={Board.positions}>C</TheFile>
+      <TheFile position={Board.positions}>D</TheFile>
+      <TheFile position={Board.positions}>E</TheFile>
+      <TheFile position={Board.positions}>F</TheFile>
+      <TheFile position={Board.positions}>G</TheFile>
+      <TheFile position={Board.positions}>H</TheFile>
     </div>
   )
 }
