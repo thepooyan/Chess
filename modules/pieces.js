@@ -19,16 +19,50 @@ export class Pawn extends Piece {
         let baseName = `${this.isWhite ? 'w' : 'b'}p.png`;
         this.imgAddress = imgFolder + baseName;
         this.currentPos.style.backgroundImage = `url("${this.imgAddress}")`;
-        // debugger;
     }
 }
 
-class Knight extends Piece { }
+export class Knight extends Piece {
+    constructor(...args) {
+        super(...args);
+        let baseName = `${this.isWhite ? 'w' : 'b'}n.png`;
+        this.imgAddress = imgFolder + baseName;
+        this.currentPos.style.backgroundImage = `url("${this.imgAddress}")`;
+    }
+}
 
-class Bishop extends Piece { }
+export class Bishop extends Piece {
+    constructor(...args) {
+        super(...args);
+        let baseName = `${this.isWhite ? 'w' : 'b'}b.png`;
+        this.imgAddress = imgFolder + baseName;
+        this.currentPos.style.backgroundImage = `url("${this.imgAddress}")`;
+    }
+}
 
-class Rook extends Piece { }
+export class Rook extends Piece {
+    constructor(...args) {
+        super(...args);
+        let baseName = `${this.isWhite ? 'w' : 'b'}r.png`;
+        this.imgAddress = imgFolder + baseName;
+        this.currentPos.style.backgroundImage = `url("${this.imgAddress}")`;
+    }
+}
 
-class Queen extends Piece { }
+export class Queen extends Piece {
+    constructor(...args) {
+        super(...args);
+        let baseName = `${this.isWhite ? 'w' : 'b'}q.png`;
+        this.imgAddress = imgFolder + baseName;
+        this.currentPos.style.backgroundImage = `url("${this.imgAddress}")`;
+    }
+}
 
-class King extends Piece { }
+export class King extends Piece {
+    constructor(...args) {
+        super(...args);
+        let baseName = `${this.isWhite ? 'w' : 'b'}k.png`;
+        this.imgAddress = imgFolder + baseName;
+        this.currentPos.style.backgroundImage = `url("${this.imgAddress}")`;
+    }
+}

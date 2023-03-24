@@ -1,4 +1,4 @@
-import { Pawn } from "./pieces";
+import { Bishop, King, Knight, Pawn, Queen, Rook } from "./pieces";
 
 export default function setUpBoard(Board) {
 
@@ -10,5 +10,16 @@ export default function setUpBoard(Board) {
     let pawn6 = new Pawn(Board.positions.B6);
     let pawn7 = new Pawn(Board.positions.B7);
     let pawn8 = new Pawn(Board.positions.B8);
+    
+    let Rknight = new Knight(Board.positions.A2);
+    let Lknight = new Knight(Board.positions.A7);
 
+    let Rrook = new Rook(Board.positions.A1);
+    let Lrook = new Rook(Board.positions.A8);
+
+    let Rbishop = new Bishop(Board.positions.A3);
+    let Lbishop = new Bishop(Board.positions.A6);
+
+    let king = new King(Board.positions.A5);
+    let queen = new Queen(Board.positions.A4);
 }
