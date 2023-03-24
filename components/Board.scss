@@ -13,6 +13,7 @@
             width: 100%;
             padding-bottom: 100%;
             background-color: var(--color1);
+            background-size: contain;
 
             &:nth-child(2n) {
                 background-color: var(--color2);
