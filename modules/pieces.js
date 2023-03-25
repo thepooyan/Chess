@@ -5,10 +5,10 @@ function getAxies(pos) {
 }
 
 class Piece {
-    constructor(currentSquare, { isWhite } = { isWhite: true }) {
-        this.currentSquare = currentSquare;
+    constructor(position, { isWhite } = { isWhite: true }) {
+        this.currentSquare = position.square;
         this.isWhite = isWhite;
-        this.pos = getAxies(currentSquare.id);
+        this.coordinates = getAxies(position.square.id);
     }
     getImg() {
         return this.imgAddress;
@@ -28,7 +28,7 @@ export class Pawn extends Piece {
     move(pos) {
         let destPos = getAxies(pos.id);
         if (this.isWhite) {
-            if (this.pos.x + 1 === destPos.x) {
+            if (this.coordinates.x + 1 === destPos.x) {
                 console.log('granted');
             } else {
                 console.log('illigal move');

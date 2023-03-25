@@ -11,14 +11,14 @@ export default function TheFile(props) {
     let file8 = useRef(null);
 
     useEffect(() => {
-        props.position[`${props.children}1`] = file1.current;
-        props.position[`${props.children}2`] = file2.current;
-        props.position[`${props.children}3`] = file3.current;
-        props.position[`${props.children}4`] = file4.current;
-        props.position[`${props.children}5`] = file5.current;
-        props.position[`${props.children}6`] = file6.current;
-        props.position[`${props.children}7`] = file7.current;
-        props.position[`${props.children}8`] = file8.current;
+        props.position[`${props.children}1`] = {square: file1.current};
+        props.position[`${props.children}2`] = {square: file2.current};
+        props.position[`${props.children}3`] = {square: file3.current};
+        props.position[`${props.children}4`] = {square: file4.current};
+        props.position[`${props.children}5`] = {square: file5.current};
+        props.position[`${props.children}6`] = {square: file6.current};
+        props.position[`${props.children}7`] = {square: file7.current};
+        props.position[`${props.children}8`] = {square: file8.current};
     })
     return (
         <div>
