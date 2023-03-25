@@ -6,6 +6,8 @@ function getAxies(pos) {
 
 class Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
+        position.occupent = this;
+        this.position = position;
         this.currentSquare = position.square;
         this.isWhite = isWhite;
         this.coordinates = getAxies(position.square.id);
@@ -24,9 +26,11 @@ export class Pawn extends Piece {
         let baseName = `${this.isWhite ? 'w' : 'b'}p.png`;
         this.imgAddress = imgFolder + baseName;
         this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.type = 'Pawn';
     }
     move(pos) {
         let destPos = getAxies(pos.id);
+        this.position.occupent = null;
         if (this.isWhite) {
             if (this.coordinates.x + 1 === destPos.x) {
                 console.log('granted');
@@ -45,6 +49,7 @@ export class Knight extends Piece {
         let baseName = `${this.isWhite ? 'w' : 'b'}n.png`;
         this.imgAddress = imgFolder + baseName;
         this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.type = 'Knight';
     }
 }
 
@@ -54,6 +59,7 @@ export class Bishop extends Piece {
         let baseName = `${this.isWhite ? 'w' : 'b'}b.png`;
         this.imgAddress = imgFolder + baseName;
         this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.type = 'Bishop';
     }
 }
 
@@ -63,6 +69,7 @@ export class Rook extends Piece {
         let baseName = `${this.isWhite ? 'w' : 'b'}r.png`;
         this.imgAddress = imgFolder + baseName;
         this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.type = 'Rook';
     }
 }
 
@@ -72,6 +79,7 @@ export class Queen extends Piece {
         let baseName = `${this.isWhite ? 'w' : 'b'}q.png`;
         this.imgAddress = imgFolder + baseName;
         this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.type = 'Queen';
     }
 }
 
@@ -81,5 +89,6 @@ export class King extends Piece {
         let baseName = `${this.isWhite ? 'w' : 'b'}k.png`;
         this.imgAddress = imgFolder + baseName;
         this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.type = 'King';
     }
 }

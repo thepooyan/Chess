@@ -11,16 +11,17 @@ export default function setUpBoard(Board) {
     let pawn7 = new Pawn(Board.positions.G2);
     let pawn8 = new Pawn(Board.positions.H2);
 
-    // pawn1.move(Board.positions.A4);
+    pawn1.move(Board.positions.A4.square);
+    debugger;
     
-    let Rknight = new Knight(Board.positions.C1);
-    let Lknight = new Knight(Board.positions.F1);
+    let Rknight = new Knight(Board.positions.B1);
+    let Lknight = new Knight(Board.positions.G1);
 
     let Rrook = new Rook(Board.positions.A1);
     let Lrook = new Rook(Board.positions.H1);
 
-    let Rbishop = new Bishop(Board.positions.B1);
-    let Lbishop = new Bishop(Board.positions.G1);
+    let Rbishop = new Bishop(Board.positions.C1);
+    let Lbishop = new Bishop(Board.positions.F1);
 
     let king = new King(Board.positions.E1);
     let queen = new Queen(Board.positions.D1);
