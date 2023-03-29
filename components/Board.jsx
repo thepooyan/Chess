@@ -12,7 +12,7 @@ function Board() {
     //test onclick for select
     Object.values(Board.positions).forEach(item => {
       item.square.onclick = _ => {
-        item.square.classList.toggle('selected');
+        item.square.classList.toggle('dot');
       }
     })
 
