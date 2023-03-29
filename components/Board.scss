@@ -31,6 +31,18 @@
                     background-color: var(--color1H);
                 }
             }
+            
+            &.dot {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+
+                &::after {
+                    content: 's';
+                    position: absolute;
+                }
+            }
         }
 
         &:nth-child(2n) {
