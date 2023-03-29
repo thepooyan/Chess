@@ -12,7 +12,6 @@ export default function setUpBoard(Board) {
     let pawn8 = new Pawn(Board.positions.H2);
 
     pawn1.move(Board.positions.A4.square);
-    debugger;
     
     let Rknight = new Knight(Board.positions.B1);
     let Lknight = new Knight(Board.positions.G1);

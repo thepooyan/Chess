@@ -6,7 +6,16 @@ import TheFile from './TheFile';
 function Board() {
 
   Board.positions = {};
-  useEffect(()=>{
+
+  useEffect(() => {
+    
+    //test onclick for select
+    Object.values(Board.positions).forEach(item => {
+      item.square.onclick = _ => {
+        item.square.classList.toggle('selected');
+      }
+    })
+
     setUpBoard(Board)
   })
 

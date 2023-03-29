@@ -1,32 +1,49 @@
 #Board {
-    --color1: blue;
-    --color2: yellow;
+    --color1: #EEEED2;
+    --color2: #769656;
+    --color1H: #F6F668;
+    --color2H: #BBCA2A;
     width: 50em;
     margin: auto;
     background-color: red;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
 
-    >* {
+    >div {
+        //file
         display: grid;
         grid-template-rows: repeat(8, 1fr);
 
         >* {
+            //square
             padding-bottom: 100%;
-            background-color: var(--color1);
             background-size: contain;
+            background-color: var(--color2);
+            &.selected {
+                background-color: var(--color2H) !important;
+            }
 
             &:nth-child(2n) {
-                background-color: var(--color2);
+                background-color: var(--color1);
+                &.selected {
+                    background-color: var(--color1H) !important;
+                }
             }
         }
 
         &:nth-child(2n) {
             >* {
-                background-color: var(--color2);
-            &:nth-child(2n) {
                 background-color: var(--color1);
-            }
+                &.selected {
+                    background-color: var(--color1H) !important;
+                }
+
+                &:nth-child(2n) {
+                    background-color: var(--color2);
+                    &.selected {
+                        background-color: var(--color2H) !important;
+                    }
+                }
             }
         }
     }
