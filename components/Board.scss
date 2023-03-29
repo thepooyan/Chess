@@ -33,6 +33,7 @@
 
         &:nth-child(2n) {
             >* {
+                //square on an even file
                 background-color: var(--color1);
                 &.selected {
                     background-color: var(--color1H) !important;
