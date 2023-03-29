@@ -20,13 +20,13 @@
             background-size: contain;
             background-color: var(--color2);
             &.selected {
-                background-color: var(--color2H) !important;
+                background-color: var(--color2H);
             }
 
             &:nth-child(2n) {
                 background-color: var(--color1);
                 &.selected {
-                    background-color: var(--color1H) !important;
+                    background-color: var(--color1H);
                 }
             }
         }
@@ -36,13 +36,13 @@
                 //square on an even file
                 background-color: var(--color1);
                 &.selected {
-                    background-color: var(--color1H) !important;
+                    background-color: var(--color1H);
                 }
 
                 &:nth-child(2n) {
                     background-color: var(--color2);
                     &.selected {
-                        background-color: var(--color2H) !important;
+                        background-color: var(--color2H);
                     }
                 }
             }
