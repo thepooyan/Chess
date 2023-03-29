@@ -3,7 +3,10 @@
     --color2: #769656;
     --color1H: #F6F668;
     --color2H: #BBCA2A;
-    width: 42em;
+    
+    --BoardSize: 800px;
+    width: var(--BoardSize);
+    height: var(--BoardSize);
     margin: auto;
     background-color: red;
     display: grid;
@@ -16,7 +19,6 @@
 
         >* {
             //square
-            padding-bottom: 100%;
             background-size: contain;
             background-color: var(--color2);
             &.selected {
