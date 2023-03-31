@@ -14,7 +14,6 @@ class Piece {
         this.position = position;
         this.isWhite = isWhite;
         this.coordinates = destructPosition(position);
-        // console.log(`x: ${this.coordinates.x} || y: ${this.coordinates.y}`);
     }
     moveAuthorize(pos) {
         return true //this is diffrent for every piece

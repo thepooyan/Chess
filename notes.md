@@ -4,7 +4,10 @@ piece class {
     1. position (direct from position OBJECT) ({square (element), occupent})
     2. coordinates (X and Y in numbers! of the current pos)
     3. isWhite=true
-    4. type = ["Pawn", "Knight", ...]
+    4. type = ["Pawn", "Knight", ...] //hows to get this from constructor?
+    5. move shape
+    **take shape is diffrent than move shape for pawn
+
 
 
     methods:
@@ -17,5 +20,10 @@ piece class {
             4. is the move going to result in a check for your own king?
         }
 
-        move {}
+        move {
+            replace the current pos with dest pos
+            check to kill the other piece (how?)
+            replace the piece with the other pos
+            empty the current square
+        }
 }
