@@ -8,15 +8,16 @@ class Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
         position.occupent = this;
         this.position = position;
-        this.currentSquare = position.square;
         this.isWhite = isWhite;
         this.coordinates = getAxies(position.square.id);
     }
-    getImg() {
-        return this.imgAddress;
+    moveAuthorize(pos) {
+        return true //this is diffrent for every piece
     }
-    getStartingPos() {
-        return this.currentSquare;
+    move(pos) {
+        if (!this.moveAuthorize(pos)) return
+
+        console.log(`moving from ${this.position} to ${pos}`); //this is the same for every piece
     }
 }
 
@@ -25,7 +26,7 @@ export class Pawn extends Piece {
         super(...args);
         let baseName = `${this.isWhite ? 'w' : 'b'}p.png`;
         this.imgAddress = imgFolder + baseName;
-        this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
         this.type = 'Pawn';
     }
     move(pos) {
@@ -48,7 +49,7 @@ export class Knight extends Piece {
         super(...args);
         let baseName = `${this.isWhite ? 'w' : 'b'}n.png`;
         this.imgAddress = imgFolder + baseName;
-        this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
         this.type = 'Knight';
     }
 }
@@ -58,7 +59,7 @@ export class Bishop extends Piece {
         super(...args);
         let baseName = `${this.isWhite ? 'w' : 'b'}b.png`;
         this.imgAddress = imgFolder + baseName;
-        this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
         this.type = 'Bishop';
     }
 }
@@ -68,7 +69,7 @@ export class Rook extends Piece {
         super(...args);
         let baseName = `${this.isWhite ? 'w' : 'b'}r.png`;
         this.imgAddress = imgFolder + baseName;
-        this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
         this.type = 'Rook';
     }
 }
@@ -78,7 +79,7 @@ export class Queen extends Piece {
         super(...args);
         let baseName = `${this.isWhite ? 'w' : 'b'}q.png`;
         this.imgAddress = imgFolder + baseName;
-        this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
         this.type = 'Queen';
     }
 }
@@ -88,7 +89,7 @@ export class King extends Piece {
         super(...args);
         let baseName = `${this.isWhite ? 'w' : 'b'}k.png`;
         this.imgAddress = imgFolder + baseName;
-        this.currentSquare.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
         this.type = 'King';
     }
 }
