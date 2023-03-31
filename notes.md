@@ -26,4 +26,10 @@ piece class {
             replace the piece with the other pos
             empty the current square
         }
+
+        get possible moves {
+            move shape => a bunch of squares
+            auth move for each => 
+            return result
+        }
 }
