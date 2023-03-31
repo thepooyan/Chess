@@ -1,7 +1,11 @@
 const imgFolder = `/Chess set themes/chessdotcom/`;
 
-function getAxies(pos) {
-    return {x:parseInt(pos[1]), y:pos[0]}
+function destructPosition(position) {
+    position = position.square.id;
+
+    let y = position[0].charCodeAt()-64;
+
+    return {x:parseInt(position[1]), y:y}
 }
 
 class Piece {
@@ -9,7 +13,8 @@ class Piece {
         position.occupent = this;
         this.position = position;
         this.isWhite = isWhite;
-        this.coordinates = getAxies(position.square.id);
+        this.coordinates = destructPosition(position);
+        // console.log(`x: ${this.coordinates.x} || y: ${this.coordinates.y}`);
     }
     moveAuthorize(pos) {
         return true //this is diffrent for every piece
@@ -29,19 +34,19 @@ export class Pawn extends Piece {
         this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
         this.type = 'Pawn';
     }
-    move(pos) {
-        let destPos = getAxies(pos.id);
-        this.position.occupent = null;
-        if (this.isWhite) {
-            if (this.coordinates.x + 1 === destPos.x) {
-                console.log('granted');
-            } else {
-                console.log('illigal move');
-            }
-        } else {
+    // move(pos) {
+    //     let destPos = getAxies(pos.id);
+    //     this.position.occupent = null;
+    //     if (this.isWhite) {
+    //         if (this.coordinates.x + 1 === destPos.x) {
+    //             console.log('granted');
+    //         } else {
+    //             console.log('illigal move');
+    //         }
+    //     } else {
 
-        }
-    }
+    //     }
+    // }
 }
 
 export class Knight extends Piece {
