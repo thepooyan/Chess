@@ -39,7 +39,6 @@ function analyseMove(currentPos, destPos) {
             x--;
         }
     }
-    
     return moveShape
 }
 
@@ -104,13 +103,13 @@ export class Pawn extends Piece {
 
 export class Knight extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super('Knight', position, 'n', isWhite, '[ud]{2}[lr]');
+        super('Knight', position, 'n', isWhite, '([ud])[lr]\\2');
     }
 }
 
 export class Bishop extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super('Bishop', position, 'b', isWhite, '?');
+        super('Bishop', position, 'b', isWhite, '([ud][lr])+');
     }
 }
 
@@ -122,12 +121,12 @@ export class Rook extends Piece {
 
 export class Queen extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super('Queen', position, 'q', isWhite, 'u+|d+|l+|r+');
+        super('Queen', position, 'q', isWhite, '(u+|d+|l+|r+)|(([ud][lr])+)');
     }
 }
 
 export class King extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super('King', position, 'k', isWhite, 'u|d|r|l');
+        super('King', position, 'k', isWhite, 'u|d|r|l|[ud][lr]');
     }
 }
