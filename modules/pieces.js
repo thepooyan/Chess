@@ -3,9 +3,9 @@ const imgFolder = `/Chess set themes/chessdotcom/`;
 function destructPosition(position) {
     position = position.square.id;
 
-    let y = position[0].charCodeAt()-64;
+    let y = position[0].charCodeAt() - 64;
 
-    return {x:parseInt(position[1]), y:y}
+    return { x: parseInt(position[1]), y: y }
 }
 
 class Piece {
@@ -26,8 +26,8 @@ class Piece {
 }
 
 export class Pawn extends Piece {
-    constructor(...args) {
-        super(...args);
+    constructor(position, { isWhite } = { isWhite: true }) {
+        super(position, { isWhite });
         let baseName = `${this.isWhite ? 'w' : 'b'}p.png`;
         this.imgAddress = imgFolder + baseName;
         this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
@@ -49,8 +49,8 @@ export class Pawn extends Piece {
 }
 
 export class Knight extends Piece {
-    constructor(...args) {
-        super(...args);
+    constructor(position, { isWhite } = { isWhite: true }) {
+        super(position, { isWhite });
         let baseName = `${this.isWhite ? 'w' : 'b'}n.png`;
         this.imgAddress = imgFolder + baseName;
         this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
@@ -59,8 +59,8 @@ export class Knight extends Piece {
 }
 
 export class Bishop extends Piece {
-    constructor(...args) {
-        super(...args);
+    constructor(position, { isWhite } = { isWhite: true }) {
+        super(position, { isWhite });
         let baseName = `${this.isWhite ? 'w' : 'b'}b.png`;
         this.imgAddress = imgFolder + baseName;
         this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
@@ -69,8 +69,8 @@ export class Bishop extends Piece {
 }
 
 export class Rook extends Piece {
-    constructor(...args) {
-        super(...args);
+    constructor(position, { isWhite } = { isWhite: true }) {
+        super(position, { isWhite });
         let baseName = `${this.isWhite ? 'w' : 'b'}r.png`;
         this.imgAddress = imgFolder + baseName;
         this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
@@ -79,8 +79,8 @@ export class Rook extends Piece {
 }
 
 export class Queen extends Piece {
-    constructor(...args) {
-        super(...args);
+    constructor(position, { isWhite } = { isWhite: true }) {
+        super(position, { isWhite });
         let baseName = `${this.isWhite ? 'w' : 'b'}q.png`;
         this.imgAddress = imgFolder + baseName;
         this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
@@ -89,8 +89,8 @@ export class Queen extends Piece {
 }
 
 export class King extends Piece {
-    constructor(...args) {
-        super(...args);
+    constructor(position, { isWhite } = { isWhite: true }) {
+        super(position, { isWhite });
         let baseName = `${this.isWhite ? 'w' : 'b'}k.png`;
         this.imgAddress = imgFolder + baseName;
         this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
