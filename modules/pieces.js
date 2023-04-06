@@ -11,6 +11,7 @@ function destructPosition(position) {
 class Piece {
     #imgAddress;
     #coordinates;
+    isKilled = false;
 
     constructor(type, position, imgBase, isWhite) {
         position.occupent = this;
@@ -29,15 +30,21 @@ class Piece {
     setBackground(address = this.#imgAddress) {
         this.position.square.style.backgroundImage = `url("${address}")`;
     }
+    kill() {
+        this.isKilled = true;
+        this.position = null;
+        this.move = null;
+    }
     moveAuthorize(pos) {
         return true //this is diffrent for every piece
     }
     move(pos) {
         if (!this.moveAuthorize(pos)) return
         if (pos.occupent) {
-            console.log(`moving ${this.type} from ${this.position.name} to ${pos.name} and killing ${pos.occupent.type}`); //this is the same for every piece
+            console.log(`moving the ${this.position.name} ${this.type} to ${pos.name} taking ${pos.occupent.type}`); //this is the same for every piece
+            pos.occupent.kill();
         } else {
-            console.log(`moving ${this.type} from ${this.position.name} to ${pos.name}`); //this is the same for every piece
+            console.log(`moving the ${this.position.name} ${this.type} to ${pos.name}`); //this is the same for every piece
         }
 
         this.setBackground(null);
