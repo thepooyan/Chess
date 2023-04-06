@@ -17,7 +17,7 @@ class Piece {
         this.position = position;
         this.isWhite = isWhite;
         this.type = type;
-        
+
         this.#coordinates = destructPosition(position);
         this.#imgAddress = this.generateImgAddress(imgBase);
         this.setBackground();
@@ -34,10 +34,14 @@ class Piece {
     }
     move(pos) {
         if (!this.moveAuthorize(pos)) return
-
-        console.log(`moving ${this.type} from ${this.position.name} to ${pos.name}`); //this is the same for every piece
+        if (pos.occupent) {
+            console.log(`moving ${this.type} from ${this.position.name} to ${pos.name} and killing ${pos.occupent.type}`); //this is the same for every piece
+        } else {
+            console.log(`moving ${this.type} from ${this.position.name} to ${pos.name}`); //this is the same for every piece
+        }
 
         this.setBackground(null);
+        this.position.occupent = null;
 
         this.position = pos;
 
