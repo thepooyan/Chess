@@ -38,13 +38,11 @@ class Piece {
         console.log(`moving ${this.type} from ${this.position.name} to ${pos.name}`); //this is the same for every piece
 
         this.setBackground(null);
-        this.position.occupent = null;
 
         this.position = pos;
 
         this.position.occupent = this;
         this.setBackground();
-        // debugger;
     }
 }
 
