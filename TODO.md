@@ -4,3 +4,4 @@
 [] - write theFile.jsx with loops
 [] - add config options
 [] - remove basename from piece class
+- change the main board id to class
