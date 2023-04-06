@@ -18,20 +18,28 @@ function analyseMove(currentPos, destPos) {
         for (let i = 0; i < count; i++)
             moveShape += letter;
     }
-
-    (function () {
-        let y = destPos.y - currentPos.y;
-        if (y == 0) return
-        if (y > 0) addLetter(y, 'u')
-        if (y < 0) addLetter(-y, 'd');
-    })();
-    (function () {
-        let x = destPos.x - currentPos.x;
-        if (x == 0) return
-        if (x > 0) addLetter(x, 'r')
-        if (x < 0) addLetter(-x, 'l');
-    })();
-
+    let y = destPos.y - currentPos.y;
+    let x = destPos.x - currentPos.x;
+    let xl = 'r', yl = 'u';
+    if (x<0) {
+        xl = 'l';
+        x = -x;
+    }
+    if (y < 0) {
+        yl = 'd';
+        y = -y;
+    }
+    while (x > 0 | y > 0) {
+        if (y>0) {
+            moveShape+=yl;
+            y--;
+        }
+        if (x>0) {
+            moveShape+=xl;
+            x--;
+        }
+    }
+    
     return moveShape
 }
 

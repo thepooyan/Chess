@@ -44,7 +44,7 @@ export default function setUpBoard(Board) {
     window.B_queen = new Queen(p.D8, {isWhite: false});
     
     function move() {
-        pawnD.move(p.A8);
+        pawnD.move(p.G6);
     }
     move()
     window.move = move;
