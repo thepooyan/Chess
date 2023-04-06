@@ -21,7 +21,7 @@ function analyseMove(currentPos, destPos) {
     let y = destPos.y - currentPos.y;
     let x = destPos.x - currentPos.x;
     let xl = 'r', yl = 'u';
-    if (x<0) {
+    if (x < 0) {
         xl = 'l';
         x = -x;
     }
@@ -30,12 +30,12 @@ function analyseMove(currentPos, destPos) {
         y = -y;
     }
     while (x > 0 | y > 0) {
-        if (y>0) {
-            moveShape+=yl;
+        if (y > 0) {
+            moveShape += yl;
             y--;
         }
-        if (x>0) {
-            moveShape+=xl;
+        if (x > 0) {
+            moveShape += xl;
             x--;
         }
     }
@@ -70,8 +70,19 @@ class Piece {
         this.move = null;
     }
     moveAuthorize(pos) {
+        //is it my turn?
+
+        //does the move shape match the move pattern of the piece?
         let moveShape = analyseMove(this.position, pos);
-        return new RegExp(`^(${this.movePattern})$`).test(moveShape);
+        if (!new RegExp(`^(${this.movePattern})$`).test(moveShape))
+            return false
+        //is there another piece in the way?
+
+        //is the destenation occupied?
+
+        //did this move result in a check for my king?
+
+        return true //authorized!!
     }
     move(pos) {
         if (!this.moveAuthorize(pos)) {
