@@ -4,14 +4,39 @@ const imgFolder = `/Chess set themes/${config.theme}/`;
 function destructPosition(position) {
     position = position.name;
 
-    let y = position[0].charCodeAt() - 64;
+    let x = position[0].charCodeAt() - 64;
 
-    return { x: parseInt(position[1]), y: y }
+    return { x:x, y: parseInt(position[1])}
+}
+function analyseMove(currentPos, destPos) {
+    let moveShape = '';
+
+    currentPos = destructPosition(currentPos);
+    destPos = destructPosition(destPos);
+
+    function addLetter(count, letter) {
+        for (let i=0; i<count; i++)
+            moveShape+=letter;
+    }
+
+    (function() {
+        let y = destPos.y - currentPos.y;
+        if (y==0) return
+        if (y>0) addLetter(y,'u')
+        if (y<0) addLetter(-y, 'd');
+    }) ();
+    (function() {
+        let x = destPos.x - currentPos.x;
+        if (x==0) return
+        if (x>0) addLetter(x,'r')
+        if (x<0) addLetter(-x, 'l');
+    }) ();
+
+    return moveShape
 }
 
 class Piece {
     #imgAddress;
-    #coordinates;
     isKilled = false;
 
     constructor(type, position, imgBase, isWhite) {
@@ -20,7 +45,6 @@ class Piece {
         this.isWhite = isWhite;
         this.type = type;
 
-        this.#coordinates = destructPosition(position);
         this.#imgAddress = this.generateImgAddress(imgBase);
         this.setBackground();
     }
@@ -37,6 +61,10 @@ class Piece {
         this.move = null;
     }
     moveAuthorize(pos) {
+        let moveShape = analyseMove(this.position, pos);
+
+        console.log(moveShape);
+
         return true //this is diffrent for every piece
     }
     move(pos) {
