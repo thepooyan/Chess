@@ -12,7 +12,7 @@ class Piece {
     #imgAddress;
     #coordinates;
 
-    constructor(type, position, imgBase, { isWhite } = { isWhite: true }) {
+    constructor(type, position, imgBase, isWhite) {
         position.occupent = this;
         this.position = position;
         this.isWhite = isWhite;
@@ -50,36 +50,36 @@ class Piece {
 
 export class Pawn extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super("Pawn", position, 'p', { isWhite });
+        super("Pawn", position, 'p', isWhite);
     }
 }
 
 export class Knight extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super('Knight', position, 'n', { isWhite });
+        super('Knight', position, 'n', isWhite);
     }
 }
 
 export class Bishop extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super('Bishop', position, 'b', { isWhite });
+        super('Bishop', position, 'b', isWhite);
     }
 }
 
 export class Rook extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super('Rook', position, 'r', { isWhite });
+        super('Rook', position, 'r', isWhite);
     }
 }
 
 export class Queen extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super('Queen', position, 'q', { isWhite });
+        super('Queen', position, 'q', isWhite);
     }
 }
 
 export class King extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super('King', position, 'k', { isWhite });
+        super('King', position, 'k', isWhite);
     }
 }
