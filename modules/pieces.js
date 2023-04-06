@@ -1,4 +1,5 @@
-const imgFolder = `/Chess set themes/chessdotcom/`;
+import config from '../config/chessConfig.json';
+const imgFolder = `/Chess set themes/${config.theme}/`;
 
 function destructPosition(position) {
     position = position.name;
