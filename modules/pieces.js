@@ -120,7 +120,7 @@ export class Pawn extends Piece {
 
 export class Knight extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super('Knight', position, 'n', isWhite, '([ud])[lr]\\2');
+        super('Knight', position, 'n', isWhite, '([ud])[lr]\\2|[du][lr]{2}');
     }
 }
 
