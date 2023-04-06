@@ -3,3 +3,4 @@
 [] - add sound for movement, check and win (connected to config)
 [] - write theFile.jsx with loops
 [] - add config options
+[] - remove basename from piece class
