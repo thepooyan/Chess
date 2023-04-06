@@ -9,15 +9,19 @@ function destructPosition(position) {
 }
 
 class Piece {
-    constructor(position, { isWhite } = { isWhite: true }) {
+    constructor(type, position, imgBase, { isWhite } = { isWhite: true }) {
         position.occupent = this;
         this.position = position;
         this.isWhite = isWhite;
+        this.type = type;
         this.coordinates = destructPosition(position);
+
+        this.imgAddress = this.generateImgAddress(imgBase);
+        this.setBackground();
     }
     generateImgAddress(base) {
         let baseName = `${this.isWhite ? 'w' : 'b'}${base}.png`;
-        this.imgAddress = imgFolder + baseName;
+        return imgFolder + baseName;
     }
     setBackground(address = this.imgAddress) {
         this.position.square.style.backgroundImage = `url("${address}")`;
@@ -43,59 +47,36 @@ class Piece {
 
 export class Pawn extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super(position, { isWhite });
-        this.generateImgAddress('p');
-        this.type = 'Pawn';
-        this.setBackground();
+        super("Pawn", position, 'p', { isWhite });
     }
 }
 
 export class Knight extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super(position, { isWhite });
-        let baseName = `${this.isWhite ? 'w' : 'b'}n.png`;
-        this.imgAddress = imgFolder + baseName;
-        this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
-        this.type = 'Knight';
+        super('Knight', position, 'n', { isWhite });
     }
 }
 
 export class Bishop extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super(position, { isWhite });
-        let baseName = `${this.isWhite ? 'w' : 'b'}b.png`;
-        this.imgAddress = imgFolder + baseName;
-        this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
-        this.type = 'Bishop';
+        super('Bishop', position, 'b', { isWhite });
     }
 }
 
 export class Rook extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super(position, { isWhite });
-        let baseName = `${this.isWhite ? 'w' : 'b'}r.png`;
-        this.imgAddress = imgFolder + baseName;
-        this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
-        this.type = 'Rook';
+        super('Rook', position, 'r', { isWhite });
     }
 }
 
 export class Queen extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super(position, { isWhite });
-        let baseName = `${this.isWhite ? 'w' : 'b'}q.png`;
-        this.imgAddress = imgFolder + baseName;
-        this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
-        this.type = 'Queen';
+        super('Queen', position, 'q', { isWhite });
     }
 }
 
 export class King extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super(position, { isWhite });
-        let baseName = `${this.isWhite ? 'w' : 'b'}k.png`;
-        this.imgAddress = imgFolder + baseName;
-        this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
-        this.type = 'King';
+        super('King', position, 'k', { isWhite });
     }
 }
