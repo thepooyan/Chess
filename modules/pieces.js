@@ -9,21 +9,24 @@ function destructPosition(position) {
 }
 
 class Piece {
+    #imgAddress;
+    #coordinates;
+
     constructor(type, position, imgBase, { isWhite } = { isWhite: true }) {
         position.occupent = this;
         this.position = position;
         this.isWhite = isWhite;
         this.type = type;
-        this.coordinates = destructPosition(position);
-
-        this.imgAddress = this.generateImgAddress(imgBase);
+        
+        this.#coordinates = destructPosition(position);
+        this.#imgAddress = this.generateImgAddress(imgBase);
         this.setBackground();
     }
     generateImgAddress(base) {
         let baseName = `${this.isWhite ? 'w' : 'b'}${base}.png`;
         return imgFolder + baseName;
     }
-    setBackground(address = this.imgAddress) {
+    setBackground(address = this.#imgAddress) {
         this.position.square.style.backgroundImage = `url("${address}")`;
     }
     moveAuthorize(pos) {
