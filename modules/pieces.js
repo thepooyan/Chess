@@ -14,10 +14,6 @@ function analyseMove(currentPos, destPos) {
     currentPos = destructPosition(currentPos);
     destPos = destructPosition(destPos);
 
-    function addLetter(count, letter) {
-        for (let i = 0; i < count; i++)
-            moveShape += letter;
-    }
     let y = destPos.y - currentPos.y;
     let x = destPos.x - currentPos.x;
     let xl = 'r', yl = 'u';
