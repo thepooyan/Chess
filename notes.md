@@ -12,12 +12,23 @@ piece class {
 
     methods:
         auth move {
-            1. is move shape ok? (ONLY THIS PART IS DIFFRENT IN ALL)
-            2. is it on the board?
-            3. is there another piece?
-                -yes -- is it not the either of the kings?
+            is it your turn?
+            is move shape ok? (ONLY THIS PART IS DIFFRENT IN ALL)
+                {
+                    does the shape match the algorythm?
+                    is there a piece in between? (except for knight)
+                }
+
+            is there another piece?
+                --is it the either of the kings?
                 --is it of the oppisite color?
-            4. is the move going to result in a check for your own king?
+
+            is the move going to result in a check for your own king?
+                {
+
+                }
+
+            authorized!!
         }
 
         move {
@@ -29,6 +40,7 @@ piece class {
 
         get possible moves {
             move shape => a bunch of squares
+            filter ones that are inside the board
             auth move for each => 
             return result
         }
