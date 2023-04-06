@@ -15,6 +15,10 @@ class Piece {
         this.isWhite = isWhite;
         this.coordinates = destructPosition(position);
     }
+    generateImgAddress(base) {
+        let baseName = `${this.isWhite ? 'w' : 'b'}${base}.png`;
+        this.imgAddress = imgFolder + baseName;
+    }
     setBackground(address = this.imgAddress) {
         this.position.square.style.backgroundImage = `url("${address}")`;
     }
@@ -40,10 +44,9 @@ class Piece {
 export class Pawn extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
         super(position, { isWhite });
-        let baseName = `${this.isWhite ? 'w' : 'b'}p.png`;
-        this.imgAddress = imgFolder + baseName;
-        this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
+        this.generateImgAddress('p');
         this.type = 'Pawn';
+        this.setBackground();
     }
 }
 

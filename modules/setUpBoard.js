@@ -1,6 +1,7 @@
 import { Bishop, King, Knight, Pawn, Queen, Rook } from "./pieces";
 
 export default function setUpBoard(Board) {
+    window.Board = Board;
 
     let pawn1 = new Pawn(Board.positions.A2);
     let pawn2 = new Pawn(Board.positions.B2);
