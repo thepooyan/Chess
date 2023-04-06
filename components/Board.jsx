@@ -13,6 +13,7 @@ function Board() {
     Object.values(Board.positions).forEach(item => {
       item.square.onclick = _ => {
         item.square.classList.toggle('dot');
+        console.log(item.occupent)
       }
     })
 

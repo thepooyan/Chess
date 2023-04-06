@@ -54,15 +54,21 @@ class Piece {
         this.type = type;
 
         this.#imgAddress = this.generateImgAddress(imgBase);
-        this.setBackground();
+        this.showInBoard();
         this.#movePattern = movePattern;
     }
     generateImgAddress(base) {
         let baseName = `${this.isWhite ? 'w' : 'b'}${base}.png`;
         return imgFolder + baseName;
     }
-    setBackground(address = this.#imgAddress) {
-        this.position.square.style.backgroundImage = `url("${address}")`;
+    showInBoard(remove) {
+        let url = remove ? null : `url("${this.#imgAddress}")`;
+        this.position.square.style.backgroundImage = url;
+        if (remove) {
+            this.position.square.classList.remove('occupied');
+        } else {
+            this.position.square.classList.add('occupied');
+        }
     }
     kill() {
         this.isKilled = true;
@@ -96,13 +102,13 @@ class Piece {
             console.log(`moving the ${this.position.name} ${this.type} to ${pos.name}`); //this is the same for every piece
         }
 
-        this.setBackground(null);
+        this.showInBoard(true);
         this.position.occupent = null;
 
         this.position = pos;
 
         this.position.occupent = this;
-        this.setBackground();
+        this.showInBoard();
     }
 }
 
