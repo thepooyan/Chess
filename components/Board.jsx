@@ -10,10 +10,17 @@ function Board() {
   useEffect(() => {
     
     //test onclick for select
-    Object.values(Board.positions).forEach(item => {
-      item.square.onclick = _ => {
-        item.square.classList.toggle('dot');
-        console.log(item.occupent)
+    Object.values(Board.positions).forEach(position => {
+      position.square.onclick = _ => {
+        let piece = position.occupent;
+
+
+        Object.values(Board.positions).forEach(position2 => {
+          position2.square.onclick = e => {
+            piece.move(position2)
+          }
+        })
+        
       }
     })
 
