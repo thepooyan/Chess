@@ -42,5 +42,8 @@ export default function setUpBoard(Board) {
     let B_king = new King(Board.positions.E8, {isWhite: false});
     let B_queen = new Queen(Board.positions.D8, {isWhite: false});
     
-    pawn1.move(Board.positions.A4);
+    function move() {
+        pawn1.move(Board.positions.A4);
+    }
+    window.move = move;
 }

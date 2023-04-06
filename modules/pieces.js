@@ -15,6 +15,9 @@ class Piece {
         this.isWhite = isWhite;
         this.coordinates = destructPosition(position);
     }
+    setBackground(address = this.imgAddress) {
+        this.position.square.style.backgroundImage = `url("${address}")`;
+    }
     moveAuthorize(pos) {
         return true //this is diffrent for every piece
     }
@@ -22,6 +25,15 @@ class Piece {
         if (!this.moveAuthorize(pos)) return
 
         console.log(`moving from ${this.position} to ${pos}`); //this is the same for every piece
+
+        this.setBackground(null);
+        this.position.occupent = null;
+
+        this.position = pos;
+
+        this.position.occupent = this;
+        this.setBackground();
+        // debugger;
     }
 }
 
@@ -33,19 +45,6 @@ export class Pawn extends Piece {
         this.position.square.style.backgroundImage = `url("${this.imgAddress}")`;
         this.type = 'Pawn';
     }
-    // move(pos) {
-    //     let destPos = getAxies(pos.id);
-    //     this.position.occupent = null;
-    //     if (this.isWhite) {
-    //         if (this.coordinates.x + 1 === destPos.x) {
-    //             console.log('granted');
-    //         } else {
-    //             console.log('illigal move');
-    //         }
-    //     } else {
-
-    //     }
-    // }
 }
 
 export class Knight extends Piece {
