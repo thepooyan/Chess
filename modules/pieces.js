@@ -1,7 +1,7 @@
 const imgFolder = `/Chess set themes/chessdotcom/`;
 
 function destructPosition(position) {
-    position = position.square.id;
+    position = position.name;
 
     let y = position[0].charCodeAt() - 64;
 
@@ -35,7 +35,7 @@ class Piece {
     move(pos) {
         if (!this.moveAuthorize(pos)) return
 
-        console.log(`moving from ${this.position} to ${pos}`); //this is the same for every piece
+        console.log(`moving ${this.type} from ${this.position.name} to ${pos.name}`); //this is the same for every piece
 
         this.setBackground(null);
         this.position.occupent = null;

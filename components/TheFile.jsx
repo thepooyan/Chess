@@ -11,14 +11,14 @@ export default function TheFile(props) {
     let file8 = useRef(null);
 
     useEffect(() => {
-        props.position[`${props.children}1`] = {square: file1.current};
-        props.position[`${props.children}2`] = {square: file2.current};
-        props.position[`${props.children}3`] = {square: file3.current};
-        props.position[`${props.children}4`] = {square: file4.current};
-        props.position[`${props.children}5`] = {square: file5.current};
-        props.position[`${props.children}6`] = {square: file6.current};
-        props.position[`${props.children}7`] = {square: file7.current};
-        props.position[`${props.children}8`] = {square: file8.current};
+        props.position[`${props.children}1`] = {square: file1.current, name: `${props.children}1`};
+        props.position[`${props.children}2`] = {square: file2.current, name: `${props.children}2`};
+        props.position[`${props.children}3`] = {square: file3.current, name: `${props.children}3`};
+        props.position[`${props.children}4`] = {square: file4.current, name: `${props.children}4`};
+        props.position[`${props.children}5`] = {square: file5.current, name: `${props.children}5`};
+        props.position[`${props.children}6`] = {square: file6.current, name: `${props.children}6`};
+        props.position[`${props.children}7`] = {square: file7.current, name: `${props.children}7`};
+        props.position[`${props.children}8`] = {square: file8.current, name: `${props.children}8`};
     })
     return (
         <div>
