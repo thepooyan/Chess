@@ -55,7 +55,7 @@ class Piece {
 
         this.#imgAddress = this.generateImgAddress(imgBase);
         this.setBackground();
-        this.movePattern = movePattern;
+        this.#movePattern = movePattern;
     }
     generateImgAddress(base) {
         let baseName = `${this.isWhite ? 'w' : 'b'}${base}.png`;
@@ -74,7 +74,7 @@ class Piece {
 
         //does the move shape match the move pattern of the piece?
         let moveShape = analyseMove(this.position, pos);
-        if (!new RegExp(`^(${this.movePattern})$`).test(moveShape))
+        if (!new RegExp(`^(${this.#movePattern})$`).test(moveShape))
             return false
         //is there another piece in the way?
 
