@@ -40,7 +40,7 @@ piece class {
             afterMove()
         }
 
-        afterMove() {
+        afterMove() { each piece calls this. method of the board it self
             change the turn
             change the clock
             is there a possible move for current player? (not stalemate)
