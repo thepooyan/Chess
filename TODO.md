@@ -5,3 +5,4 @@
 [] - add config options
 [] - remove basename from piece class
 - change the main board id to class
+- donw up for the black pawns?

@@ -21,6 +21,7 @@
             //square
             background-size: contain;
             background-color: var(--color2);
+            cursor: pointer;
             &.selected {
                 background-color: var(--color2H);
             }

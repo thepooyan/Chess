@@ -8,23 +8,32 @@ function Board() {
   Board.positions = {};
 
   useEffect(() => {
-    
-    //test onclick for select
-    Object.values(Board.positions).forEach(position => {
-      position.square.onclick = _ => {
-        let piece = position.occupent;
+    setUpBoard(Board);
 
+    function layerOneClick() {
+      Object.values(Board.positions).forEach(position => {
+        if (position.occupent) {
 
-        Object.values(Board.positions).forEach(position2 => {
-          position2.square.onclick = e => {
-            piece.move(position2)
+          position.square.onclick = _ => {
+            let piece = position.occupent;
+            position.square.classList.add('selected');
+
+            Object.values(Board.positions).forEach(position2 => {
+              position2.square.onclick = e => {
+                piece.move(position2);
+                position.square.classList.remove('selected');
+                layerOneClick();
+              }
+            })
+
           }
-        })
-        
-      }
-    })
+        } else {
+          position.square.onclick = null;
+        }
+      })
+    }
+    layerOneClick();
 
-    setUpBoard(Board)
   })
 
   return (
