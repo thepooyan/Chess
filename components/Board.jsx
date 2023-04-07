@@ -1,39 +1,16 @@
 import { useEffect } from 'react';
+import setBoardClicks from '../modules/setBoardClicks';
 import setUpBoard from '../modules/setUpBoard';
 import './Board.scss';
 import TheFile from './TheFile';
 
-function Board() {
+function Board({isWhite}) {
 
   Board.positions = {};
 
   useEffect(() => {
-    setUpBoard(Board);
-
-    function layerOneClick() {
-      Object.values(Board.positions).forEach(position => {
-        if (position.occupent) {
-
-          position.square.onclick = _ => {
-            let piece = position.occupent;
-            position.square.classList.add('selected');
-
-            Object.values(Board.positions).forEach(position2 => {
-              position2.square.onclick = e => {
-                piece.move(position2);
-                position.square.classList.remove('selected');
-                layerOneClick();
-              }
-            })
-
-          }
-        } else {
-          position.square.onclick = null;
-        }
-      })
-    }
-    layerOneClick();
-
+    setUpBoard(Board, isWhite);
+    setBoardClicks(Board)
   })
 
   return (
