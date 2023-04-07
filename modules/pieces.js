@@ -39,7 +39,6 @@ function analyseMove(currentPos, destPos) {
 }
 
 class Piece {
-    #imgAddress;
     isKilled = false;
 
     constructor(type, position, isWhite, movePattern, Board) {
@@ -49,17 +48,13 @@ class Piece {
         this.type = type;
         this.Board = Board;
         this.firstMove = true;
-
-        this.#imgAddress = this.generateImgAddress(type);
-        this.showInBoard();
         this.movePattern = movePattern;
-    }
-    generateImgAddress(base) {
-        let baseName = `${this.isWhite ? 'w' : 'b'}${base}.png`;
-        return imgFolder + baseName;
+        this.imgAddress = imgFolder + `${this.isWhite ? 'w' : 'b'}${this.type}.png`; 
+
+        this.showInBoard();
     }
     showInBoard(remove) {
-        let url = remove ? null : `url("${this.#imgAddress}")`;
+        let url = remove ? null : `url("${this.imgAddress}")`;
         this.position.square.style.backgroundImage = url;
         if (remove) {
             this.position.square.classList.remove('occupied');
