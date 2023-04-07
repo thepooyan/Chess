@@ -64,18 +64,13 @@ class Piece {
             this.position.square.classList.add('occupied');
         }
     }
-    #moveAuthorize(pos) {
-        let moveShape = Piece.analyseMove(this.position, pos);
-
-        //handle exceptions if there are
-        if (this.authIntersect)
-            this.authIntersect(moveShape, pos)
-
+    moveAuthorize(pos) {
         //is it my turn?
         // if (this.Board.turn.isWhite !== this.isWhite)
         //     return false
 
         //does the move shape match the move pattern of the piece?
+        let moveShape = Piece.analyseMove(this.position, pos);
         if (!new RegExp(`^(${this.movePattern})$`).test(moveShape))
             return false
 
@@ -92,7 +87,7 @@ class Piece {
         return true //authorized!!
     }
     move(pos) {
-        if (!this.#moveAuthorize(pos)) {
+        if (!this.moveAuthorize(pos)) {
             console.log(`unauthorized move (${this.type} ${this.position.name} => ${pos.name})`);
             return false
         }
@@ -124,9 +119,11 @@ class Piece {
 export class Pawn extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
         super("Pawn", position, isWhite, 'u', Board);
-        this.patternBackup = this.movePattern;
     }
-    authIntersect(moveShape, pos) {
+    moveAuthorize(pos) {
+        let patternBackup = this.movePattern;
+        let moveShape = Piece.analyseMove(this.position, pos);
+
         if (moveShape === 'u' && pos.occupent) {
             this.movePattern = ''
         }
@@ -136,11 +133,11 @@ export class Pawn extends Piece {
         if (this.firstMove) {
             this.movePattern += '|uu';
         }
-
+        let res = super.moveAuthorize(pos);
         //reset the move pattern after the move is done
-        setTimeout(() => {
-            this.movePattern = this.patternBackup;
-        }, 0);
+        this.movePattern = patternBackup;
+
+        return res
     }
     move(pos) {
         let move = super.move(pos);
@@ -178,8 +175,5 @@ export class Queen extends Piece {
 export class King extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
         super('King', position, isWhite, 'u|d|r|l|[ud][lr]', Board);
-    }
-    authIntersect(moveShape, pos) {
-
     }
 }
