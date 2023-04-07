@@ -40,7 +40,6 @@ function analyseMove(currentPos, destPos) {
 
 class Piece {
     #imgAddress;
-    #movePattern;
     isKilled = false;
 
     constructor(type, position, imgBase, isWhite, movePattern) {
@@ -51,7 +50,7 @@ class Piece {
 
         this.#imgAddress = this.generateImgAddress(imgBase);
         this.showInBoard();
-        this.#movePattern = movePattern;
+        this.movePattern = movePattern;
     }
     generateImgAddress(base) {
         let baseName = `${this.isWhite ? 'w' : 'b'}${base}.png`;
@@ -72,11 +71,12 @@ class Piece {
         this.move = null;
     }
     moveAuthorize(pos) {
+        if (this.authIntersect) this.authIntersect(pos)
         //is it my turn?
 
         //does the move shape match the move pattern of the piece?
         let moveShape = analyseMove(this.position, pos);
-        if (!new RegExp(`^(${this.#movePattern})$`).test(moveShape))
+        if (!new RegExp(`^(${this.movePattern})$`).test(moveShape))
             return false
         //is there another piece in the way?
 
@@ -110,7 +110,22 @@ class Piece {
 
 export class Pawn extends Piece {
     constructor(position, { isWhite } = { isWhite: true }) {
-        super("Pawn", position, 'p', isWhite, 'u|ur|ul');
+        super("Pawn", position, 'p', isWhite, 'u');
+
+        this.firstMove = true;
+    }
+    authIntersect(pos) {
+        let moveShape = analyseMove(this.position, pos);
+        console.log(Board.positions);
+        if (moveShape === 'ur') {
+            console.log(`sideways`);
+        }
+        if (this.firstMove) {
+            this.movePattern = 'u|uu';
+            this.firstMove = false;
+        } else {
+            this.movePattern = 'u';
+        }
     }
 }
 
