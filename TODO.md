@@ -12,3 +12,4 @@
 - setup the board has to be an optional function of the board
 - pawn transform to queen? :))
 - Board files and rows have to be based on isWhite
+- should move pattern be static to each piece class?
