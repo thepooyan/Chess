@@ -94,7 +94,7 @@ class Piece {
     move(pos) {
         if (!this.#moveAuthorize(pos)) {
             console.log(`unauthorized move (${this.type} ${this.position.name} => ${pos.name})`);
-            return
+            return false
         }
         if (pos.occupent) {
             console.log(`moving the ${this.position.name} ${this.type} to ${pos.name} taking ${pos.occupent.type}`); //this is the same for every piece
@@ -112,6 +112,7 @@ class Piece {
         this.#showInBoard();
 
         this.firstMove = false;
+        return true
     }
     kill() {
         this.isKilled = true;
@@ -135,17 +136,18 @@ export class Pawn extends Piece {
         if (this.firstMove) {
             this.movePattern += '|uu';
         }
-        if (/.8/.test(pos.name)) {
-            setTimeout(() => {
-                new Queen(this.position, this.Board, { isWhite: this.isWhite });
-                this.kill();
-            }, 0);
-        }
 
         //reset the move pattern after the move is done
         setTimeout(() => {
             this.movePattern = this.patternBackup;
         }, 0);
+    }
+    move(pos) {
+        let move = super.move(pos);
+        if (move && /.8/.test(pos.name)) {
+            new Queen(this.position, this.Board, { isWhite: this.isWhite });
+            this.kill();
+        }
     }
 }
 
