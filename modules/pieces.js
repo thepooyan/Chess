@@ -88,7 +88,7 @@ class Piece {
     }
     move(pos) {
         if (!this.moveAuthorize(pos)) {
-            console.log(`unauthorized move`);
+            console.log(`unauthorized move (${this.type} ${this.position.name} => ${pos.name})`);
             return
         }
         if (pos.occupent) {
