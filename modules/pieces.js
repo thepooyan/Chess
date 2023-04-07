@@ -52,7 +52,7 @@ class Piece {
         this.firstMove = true;
         this.patternBackup = movePattern;
 
-        this.#imgAddress = this.generateImgAddress(imgBase);
+        this.#imgAddress = this.generateImgAddress(type);
         this.showInBoard();
         this.movePattern = movePattern;
     }
