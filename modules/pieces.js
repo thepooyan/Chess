@@ -137,14 +137,14 @@ export class Pawn extends Piece {
         //reset the move pattern after the move is done
         this.movePattern = patternBackup;
 
-        return res
-    }
-    move(pos) {
-        let move = super.move(pos);
-        if (move && /.8/.test(pos.name)) {
-            new Queen(this.position, this.Board, { isWhite: this.isWhite });
-            this.kill();
+        if (res && /.8/.test(pos.name)) {
+            setTimeout(() => {
+                new Queen(this.position, this.Board, { isWhite: this.isWhite });
+                this.kill();
+            }, 0);
         }
+
+        return res
     }
 }
 
