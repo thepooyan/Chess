@@ -48,9 +48,7 @@ class Piece {
         this.isWhite = isWhite;
         this.type = type;
         this.Board = Board;
-
         this.firstMove = true;
-        this.patternBackup = movePattern;
 
         this.#imgAddress = this.generateImgAddress(type);
         this.showInBoard();
@@ -74,10 +72,6 @@ class Piece {
         this.position = null;
         this.move = null;
     }
-    intersectCleanup() {
-        this.movePattern = this.patternBackup;
-        this.firstMove = false;
-    }
     moveAuthorize(pos) {
         let moveShape = analyseMove(this.position, pos);
 
@@ -93,7 +87,7 @@ class Piece {
         if (!new RegExp(`^(${this.movePattern})$`).test(moveShape))
             return false
             
-        //is there another piece in the way?
+        //is there another piece in the way? (for pawn's first move too)
 
         //is the destenation occupied?
         if (pos.occupent) {
@@ -125,14 +119,14 @@ class Piece {
         this.position.occupent = this;
         this.showInBoard();
 
-        this.intersectCleanup();
+        this.firstMove = false;
     }
 }
 
 export class Pawn extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
         super("Pawn", position, isWhite, 'u', Board);
-
+        this.patternBackup = this.movePattern;
     }
     authIntersect(moveShape, pos) {
         if (moveShape === 'u' && pos.occupent) {
@@ -150,6 +144,11 @@ export class Pawn extends Piece {
                 this.kill();
             }, 0);
         }
+
+        //reset the move pattern after the move is done
+        setTimeout(() => {
+            this.movePattern = this.patternBackup;
+        }, 0);
     }
 }
 
