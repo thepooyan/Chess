@@ -49,6 +49,9 @@ class Piece {
         this.type = type;
         this.Board = Board;
 
+        this.firstMove = true;
+        this.patternBackup = movePattern;
+
         this.#imgAddress = this.generateImgAddress(imgBase);
         this.showInBoard();
         this.movePattern = movePattern;
@@ -70,6 +73,10 @@ class Piece {
         this.isKilled = true;
         this.position = null;
         this.move = null;
+    }
+    intersectCleanup() {
+        this.movePattern = this.patternBackup;
+        this.firstMove = false;
     }
     moveAuthorize(pos) {
         if (this.authIntersect) this.authIntersect(pos)
@@ -107,7 +114,7 @@ class Piece {
         this.position.occupent = this;
         this.showInBoard();
 
-        if (this.intersectCleanup) this.intersectCleanup()
+        this.intersectCleanup();
     }
 }
 
@@ -115,8 +122,6 @@ export class Pawn extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
         super("Pawn", position, 'p', isWhite, 'u', Board);
 
-        this.firstMove = true;
-        this.patternBackup = this.movePattern;
     }
     authIntersect(pos) {
         let moveShape = analyseMove(this.position, pos);
@@ -127,10 +132,6 @@ export class Pawn extends Piece {
         if (this.firstMove) {
             this.movePattern += 'u|uu';
         }
-    }
-    intersectCleanup() {
-        this.movePattern = this.patternBackup;
-        this.firstMove = false;
     }
 }
 
