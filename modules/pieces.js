@@ -106,6 +106,8 @@ class Piece {
 
         this.position.occupent = this;
         this.showInBoard();
+
+        if (this.intersectCleanup) this.intersectCleanup()
     }
 }
 
@@ -114,19 +116,21 @@ export class Pawn extends Piece {
         super("Pawn", position, 'p', isWhite, 'u', Board);
 
         this.firstMove = true;
+        this.patternBackup = this.movePattern;
     }
     authIntersect(pos) {
         let moveShape = analyseMove(this.position, pos);
-        console.log(Board.positions);
-        if (moveShape === 'ur') {
-            console.log(`sideways`);
+
+        if ((moveShape === 'ur' || moveShape === 'ul') && pos.occupent) {
+            this.movePattern += '|ur|ul'
         }
         if (this.firstMove) {
-            this.movePattern = 'u|uu';
-            this.firstMove = false;
-        } else {
-            this.movePattern = 'u';
+            this.movePattern += 'u|uu';
         }
+    }
+    intersectCleanup() {
+        this.movePattern = this.patternBackup;
+        this.firstMove = false;
     }
 }
 
