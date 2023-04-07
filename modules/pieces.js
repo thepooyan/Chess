@@ -42,7 +42,7 @@ class Piece {
     #imgAddress;
     isKilled = false;
 
-    constructor(type, position, imgBase, isWhite, movePattern, Board) {
+    constructor(type, position, isWhite, movePattern, Board) {
         position.occupent = this;
         this.position = position;
         this.isWhite = isWhite;
@@ -131,7 +131,7 @@ class Piece {
 
 export class Pawn extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
-        super("Pawn", position, 'p', isWhite, 'u', Board);
+        super("Pawn", position, isWhite, 'u', Board);
 
     }
     authIntersect(moveShape, pos) {
@@ -149,31 +149,31 @@ export class Pawn extends Piece {
 
 export class Knight extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
-        super('Knight', position, 'n', isWhite, '([ud])[lr]\\2|[du][lr]{2}', Board);
+        super('Knight', position, isWhite, '([ud])[lr]\\2|[du][lr]{2}', Board);
     }
 }
 
 export class Bishop extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
-        super('Bishop', position, 'b', isWhite, '([ud][lr])+', Board);
+        super('Bishop', position, isWhite, '([ud][lr])+', Board);
     }
 }
 
 export class Rook extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
-        super('Rook', position, 'r', isWhite, 'u+|d+|l+|r+', Board);
+        super('Rook', position, isWhite, 'u+|d+|l+|r+', Board);
     }
 }
 
 export class Queen extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
-        super('Queen', position, 'q', isWhite, '(u+|d+|l+|r+)|(([ud][lr])+)', Board);
+        super('Queen', position, isWhite, '(u+|d+|l+|r+)|(([ud][lr])+)', Board);
     }
 }
 
 export class King extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
-        super('King', position, 'k', isWhite, 'u|d|r|l|[ud][lr]', Board);
+        super('King', position, isWhite, 'u|d|r|l|[ud][lr]', Board);
     }
     authIntersect(moveShape, pos) {
 
