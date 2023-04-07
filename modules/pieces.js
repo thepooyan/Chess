@@ -125,12 +125,14 @@ export class Pawn extends Piece {
     }
     authIntersect(pos) {
         let moveShape = analyseMove(this.position, pos);
-
+        if (moveShape === 'u' && pos.occupent) {
+            this.movePattern = ''
+        }
         if ((moveShape === 'ur' || moveShape === 'ul') && pos.occupent) {
             this.movePattern += '|ur|ul'
         }
         if (this.firstMove) {
-            this.movePattern += 'u|uu';
+            this.movePattern += '|uu';
         }
     }
 }
