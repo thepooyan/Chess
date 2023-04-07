@@ -36,6 +36,16 @@ piece class {
             check to kill the other piece (how?)
             replace the piece with the other pos
             empty the current square
+
+            afterMove()
+        }
+
+        afterMove() {
+            change the turn
+            change the clock
+            is there a possible move for current player? (not stalemate)
+            was the last move check?
+            was it checkmate?
         }
 
         get possible moves {

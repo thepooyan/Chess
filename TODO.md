@@ -9,3 +9,4 @@
 - how to determine who's turn is it? (has to be inside boards clouser, also the times for each player)
 - how to pass the board to the pieces?
 - test with multiple boards
+- setup the board has to be an optional function of the board
