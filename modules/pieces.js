@@ -1,42 +1,8 @@
 import config from '../config/chessConfig.json';
 const imgFolder = `/Chess set themes/${config.theme}/`;
 
-function destructPosition(position) {
-    position = position.name;
 
-    let x = position[0].charCodeAt() - 64;
 
-    return { x: x, y: parseInt(position[1]) }
-}
-function analyseMove(currentPos, destPos) {
-    let moveShape = '';
-
-    currentPos = destructPosition(currentPos);
-    destPos = destructPosition(destPos);
-
-    let y = destPos.y - currentPos.y;
-    let x = destPos.x - currentPos.x;
-    let xl = 'r', yl = 'u';
-    if (x < 0) {
-        xl = 'l';
-        x = -x;
-    }
-    if (y < 0) {
-        yl = 'd';
-        y = -y;
-    }
-    while (x > 0 | y > 0) {
-        if (y > 0) {
-            moveShape += yl;
-            y--;
-        }
-        if (x > 0) {
-            moveShape += xl;
-            x--;
-        }
-    }
-    return moveShape
-}
 
 class Piece {
     isKilled = false;
@@ -49,11 +15,47 @@ class Piece {
         this.Board = Board;
         this.firstMove = true;
         this.movePattern = movePattern;
-        this.imgAddress = imgFolder + `${this.isWhite ? 'w' : 'b'}${this.type}.png`; 
+        this.imgAddress = imgFolder + `${this.isWhite ? 'w' : 'b'}${this.type}.png`;
 
-        this.showInBoard();
+        this.#showInBoard();
     }
-    showInBoard(remove) {
+    static analyseMove(currentPos, destPos) {
+        let moveShape = '';
+
+        currentPos = Piece.destructPosition(currentPos);
+        destPos = Piece.destructPosition(destPos);
+
+        let y = destPos.y - currentPos.y;
+        let x = destPos.x - currentPos.x;
+        let xl = 'r', yl = 'u';
+        if (x < 0) {
+            xl = 'l';
+            x = -x;
+        }
+        if (y < 0) {
+            yl = 'd';
+            y = -y;
+        }
+        while (x > 0 | y > 0) {
+            if (y > 0) {
+                moveShape += yl;
+                y--;
+            }
+            if (x > 0) {
+                moveShape += xl;
+                x--;
+            }
+        }
+        return moveShape
+    }
+    static destructPosition(position) {
+        position = position.name;
+
+        let x = position[0].charCodeAt() - 64;
+
+        return { x: x, y: parseInt(position[1]) }
+    }
+    #showInBoard(remove) {
         let url = remove ? null : `url("${this.imgAddress}")`;
         this.position.square.style.backgroundImage = url;
         if (remove) {
@@ -62,13 +64,8 @@ class Piece {
             this.position.square.classList.add('occupied');
         }
     }
-    kill() {
-        this.isKilled = true;
-        this.position = null;
-        this.move = null;
-    }
-    moveAuthorize(pos) {
-        let moveShape = analyseMove(this.position, pos);
+    #moveAuthorize(pos) {
+        let moveShape = Piece.analyseMove(this.position, pos);
 
         //handle exceptions if there are
         if (this.authIntersect)
@@ -81,7 +78,7 @@ class Piece {
         //does the move shape match the move pattern of the piece?
         if (!new RegExp(`^(${this.movePattern})$`).test(moveShape))
             return false
-            
+
         //is there another piece in the way? (for pawn's first move too)
 
         //is the destenation occupied?
@@ -95,7 +92,7 @@ class Piece {
         return true //authorized!!
     }
     move(pos) {
-        if (!this.moveAuthorize(pos)) {
+        if (!this.#moveAuthorize(pos)) {
             console.log(`unauthorized move (${this.type} ${this.position.name} => ${pos.name})`);
             return
         }
@@ -106,15 +103,20 @@ class Piece {
             console.log(`moving the ${this.position.name} ${this.type} to ${pos.name}`); //this is the same for every piece
         }
 
-        this.showInBoard(true);
+        this.#showInBoard(true);
         this.position.occupent = null;
 
         this.position = pos;
 
         this.position.occupent = this;
-        this.showInBoard();
+        this.#showInBoard();
 
         this.firstMove = false;
+    }
+    kill() {
+        this.isKilled = true;
+        this.position = null;
+        this.move = null;
     }
 }
 
@@ -135,7 +137,7 @@ export class Pawn extends Piece {
         }
         if (/.8/.test(pos.name)) {
             setTimeout(() => {
-                new Queen(this.position, this.Board, {isWhite:this.isWhite});
+                new Queen(this.position, this.Board, { isWhite: this.isWhite });
                 this.kill();
             }, 0);
         }
