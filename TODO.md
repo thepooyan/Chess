@@ -10,3 +10,4 @@
 - how to pass the board to the pieces?
 - test with multiple boards
 - setup the board has to be an optional function of the board
+- pawn transform to queen? :))
