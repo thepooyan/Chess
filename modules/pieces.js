@@ -144,6 +144,12 @@ export class Pawn extends Piece {
         if (this.firstMove) {
             this.movePattern += '|uu';
         }
+        if (/.8/.test(pos.name)) {
+            setTimeout(() => {
+                new Queen(this.position, this.Board, {isWhite:this.isWhite});
+                this.kill();
+            }, 0);
+        }
     }
 }
 
