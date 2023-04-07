@@ -16,3 +16,4 @@
 - write intersect for castles
 - pawn's intersect should check of on posunt and reach of the end file
 - replace window with Board.pieces in setUpBoard.js
+- should img address be static to each piece class?
