@@ -80,16 +80,26 @@ class Piece {
     }
     moveAuthorize(pos) {
         let moveShape = analyseMove(this.position, pos);
+
         //handle exceptions if there are
-        if (this.authIntersect) this.authIntersect(moveShape,pos)
+        if (this.authIntersect)
+            this.authIntersect(moveShape, pos)
+
         //is it my turn?
+        // if (this.Board.turn.isWhite !== this.isWhite)
+        //     return false
 
         //does the move shape match the move pattern of the piece?
         if (!new RegExp(`^(${this.movePattern})$`).test(moveShape))
             return false
+            
         //is there another piece in the way?
 
         //is the destenation occupied?
+        if (pos.occupent) {
+            if (pos.occupent.isWhite === this.isWhite)
+                return false
+        }
 
         //did this move result in a check for my king?
 
@@ -124,7 +134,7 @@ export class Pawn extends Piece {
         super("Pawn", position, 'p', isWhite, 'u', Board);
 
     }
-    authIntersect(moveShape,pos) {
+    authIntersect(moveShape, pos) {
         if (moveShape === 'u' && pos.occupent) {
             this.movePattern = ''
         }

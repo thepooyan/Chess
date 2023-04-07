@@ -20,7 +20,6 @@ piece class {
                 }
 
             is there another piece?
-                --is it the either of the kings?
                 --is it of the oppisite color?
 
             is the move going to result in a check for your own king?
