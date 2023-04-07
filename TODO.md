@@ -16,3 +16,4 @@
 - write intersect for castles
 - pawn's intersect should check of on posunt and reach of the end file
 - move intersec cleanup to piece class?
+- replace window with Board.pieces in setUpBoard.js
