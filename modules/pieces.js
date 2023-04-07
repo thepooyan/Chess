@@ -79,11 +79,12 @@ class Piece {
         this.firstMove = false;
     }
     moveAuthorize(pos) {
-        if (this.authIntersect) this.authIntersect(pos)
+        let moveShape = analyseMove(this.position, pos);
+        //handle exceptions if there are
+        if (this.authIntersect) this.authIntersect(moveShape,pos)
         //is it my turn?
 
         //does the move shape match the move pattern of the piece?
-        let moveShape = analyseMove(this.position, pos);
         if (!new RegExp(`^(${this.movePattern})$`).test(moveShape))
             return false
         //is there another piece in the way?
@@ -123,8 +124,7 @@ export class Pawn extends Piece {
         super("Pawn", position, 'p', isWhite, 'u', Board);
 
     }
-    authIntersect(pos) {
-        let moveShape = analyseMove(this.position, pos);
+    authIntersect(moveShape,pos) {
         if (moveShape === 'u' && pos.occupent) {
             this.movePattern = ''
         }
@@ -164,5 +164,8 @@ export class Queen extends Piece {
 export class King extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
         super('King', position, 'k', isWhite, 'u|d|r|l|[ud][lr]', Board);
+    }
+    authIntersect(moveShape, pos) {
+
     }
 }

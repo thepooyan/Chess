@@ -18,11 +18,11 @@ export default function setUpBoard(Board, isWhite) {
     window.pawnG = new Pawn(p.G2,Board, {isWhite: isWhite});
     window.pawnH = new Pawn(p.H2,Board, {isWhite: isWhite});
     window.Lknight = new Knight(p.B1,Board, {isWhite: isWhite});
-    window.Rknight = new Knight(p.G1,Board, {isWhite: isWhite});
+    // window.Rknight = new Knight(p.G1,Board, {isWhite: isWhite});
     window.Lrook = new Rook(p.A1,Board, {isWhite: isWhite});
     window.Rrook = new Rook(p.H1,Board, {isWhite: isWhite});
     window.Lbishop = new Bishop(p.C1,Board, {isWhite: isWhite});
-    window.Rbishop = new Bishop(p.F1,Board, {isWhite: isWhite});
+    // window.Rbishop = new Bishop(p.F1,Board, {isWhite: isWhite});
     window.king = new King(p.E1,Board, {isWhite: isWhite});
     window.queen = new Queen(p.D1,Board, {isWhite: isWhite});
 
