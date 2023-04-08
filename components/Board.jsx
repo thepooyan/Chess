@@ -7,6 +7,7 @@ import TheFile from './TheFile';
 function Board({ isWhite }) {
 
   Board.positions = {};
+  Board.pieces = {white:{}, black:{}}
 
   Board.turn = {
     isWhite: true,
@@ -14,7 +15,7 @@ function Board({ isWhite }) {
       this.isWhite = !this.isWhite
     }
   }
-  
+
   Board.aftermove = () => {
     Board.turn.change();
   }
