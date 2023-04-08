@@ -111,13 +111,16 @@ class Piece {
             if (!isCourseClear(here.y, dest.x, here.x, this.Board, true))
                 return false
         }
-        // if (here.x - here.y === dest.x - dest.y) {
-        //     console.log('same diagnal acedning');
-        // }
-        // if (here.x - dest.y === here.x - dest.y) {
-        //     console.log('same diagnal decending');
-        // }
-
+        if (here.x - here.y === dest.x - dest.y || here.x - dest.x === dest.y - here.y) {
+            let xCount = Math.abs(here.x - dest.x);
+            for (let i=1; i < xCount; i++) {
+                let x = Math.min(here.x, dest.x)+i;
+                let y = Math.min(here.y, dest.y)+i;
+                let square = Piece.restructPosition(x,y);
+                if (this.Board.positions[square].occupent)
+                    return false
+            }
+        }
         //did this move result in a check for my king?
 
         return true //authorized!!
