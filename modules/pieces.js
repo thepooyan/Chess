@@ -6,6 +6,7 @@ const imgFolder = `/Chess set themes/${config.theme}/`;
 
 class Piece {
     isKilled = false;
+    firstMove = true;
 
     constructor(type, position, isWhite, movePattern, Board) {
         position.occupent = this;
@@ -13,7 +14,6 @@ class Piece {
         this.isWhite = isWhite;
         this.type = type;
         this.Board = Board;
-        this.firstMove = true;
         this.movePattern = movePattern;
         this.imgAddress = imgFolder + `${this.isWhite ? 'w' : 'b'}${this.type}.png`;
 
@@ -55,6 +55,9 @@ class Piece {
 
         return { x: x, y: parseInt(position[1]) }
     }
+    static restructPosition(x, y) {
+        return `${String.fromCharCode(x + 64)}${y}`
+    }
     #showInBoard(remove) {
         let url = remove ? null : `url("${this.imgAddress}")`;
         this.position.square.style.backgroundImage = url;
@@ -74,13 +77,46 @@ class Piece {
         if (!new RegExp(`^(${this.movePattern})$`).test(moveShape))
             return false
 
-        //is there another piece in the way? (for pawn's first move too)
-
         //is the destenation occupied?
         if (pos.occupent) {
             if (pos.occupent.isWhite === this.isWhite)
                 return false
         }
+
+        //is there another piece in the way? (for pawn's first move too)
+        let here = Piece.destructPosition(this.position);
+        let dest = Piece.destructPosition(pos);
+
+        function isCourseClear(x, y1, y2, Board, reverse) {
+            let count = Math.max(y1, y2) - 1 - Math.min(y1, y2);
+            for (let i = 0; i < count; i++) {
+                let y = Math.min(y2, y1) + 1 + i;
+                let square;
+                if (reverse) {
+                    square = Piece.restructPosition(y, x);
+                } else {
+                    square = Piece.restructPosition(x, y);
+                }
+                if (Board.positions[square].occupent)
+                    return false
+            }
+            return true
+        }
+
+        if (here.x === dest.x) {
+            if (!isCourseClear(here.x, dest.y, here.y, this.Board))
+                return false
+        }
+        if (here.y === dest.y) {
+            if (!isCourseClear(here.y, dest.x, here.x, this.Board, true))
+                return false
+        }
+        // if (here.x - here.y === dest.x - dest.y) {
+        //     console.log('same diagnal acedning');
+        // }
+        // if (here.x - dest.y === here.x - dest.y) {
+        //     console.log('same diagnal decending');
+        // }
 
         //did this move result in a check for my king?
 
@@ -185,7 +221,7 @@ export class King extends Piece {
             if (moveShape === 'rr') {
                 console.log('right castle attempt');
                 let rRook = this.Board.positions.H1.occupent;
-                
+
             }
             if (moveShape === 'll') {
                 console.log('left castle attempt');
