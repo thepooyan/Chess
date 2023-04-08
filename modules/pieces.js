@@ -69,6 +69,10 @@ class Piece {
     }
     moveAuthorize(pos) {
         try {
+            //start checkings...
+            if (pos.name === this.position.name)
+                throw new Error(`can't stay still :/`)
+
             //is it my turn?
             if (this.Board.turn.isWhite !== this.isWhite)
                 throw new Error(`it's not your move`)
@@ -84,7 +88,7 @@ class Piece {
                     throw new Error(`can't take your own piece`)
             }
 
-            //is there another piece in the way? (for pawn's first move too)
+            //is there another piece in the way?
             let here = Piece.destructPosition(this.position);
             let dest = Piece.destructPosition(pos);
 
@@ -103,15 +107,17 @@ class Piece {
                 }
                 return true
             }
-
+            //checking rows
             if (here.x === dest.x) {
                 if (!isCourseClear(here.x, dest.y, here.y, this.Board))
                     throw new Error('another vertical piece in the way.')
             }
+            //checking columns
             if (here.y === dest.y) {
                 if (!isCourseClear(here.y, dest.x, here.x, this.Board, true))
                     throw new Error('another horizantal piece in the way')
             }
+            //checking diagnals
             if (here.x - here.y === dest.x - dest.y || here.x - dest.x === dest.y - here.y) {
                 let xCount = Math.abs(here.x - dest.x);
                 for (let i = 1; i < xCount; i++) {
@@ -123,6 +129,7 @@ class Piece {
                 }
             }
             //did this move result in a check for my king?
+            //...
 
         } catch (err) {
             console.log(`unauthorized move (${this.type} ${this.position.name} => ${pos.name})\n`, err.message);
