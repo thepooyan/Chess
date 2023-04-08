@@ -68,73 +68,76 @@ class Piece {
         }
     }
     moveAuthorize(pos) {
-        //is it my turn?
-        // if (this.Board.turn.isWhite !== this.isWhite)
-        //     return false
+        try {
+            //is it my turn?
+            // if (this.Board.turn.isWhite !== this.isWhite)
+            //     return false
 
-        //does the move shape match the move pattern of the piece?
-        let moveShape = Piece.analyseMove(this.position, pos);
-        if (!new RegExp(`^(${this.movePattern})$`).test(moveShape))
-            return false
+            //does the move shape match the move pattern of the piece?
+            let moveShape = Piece.analyseMove(this.position, pos);
+            if (!new RegExp(`^(${this.movePattern})$`).test(moveShape))
+                throw new Error('not compatible with move pattern')
 
-        //is the destenation occupied?
-        if (pos.occupent) {
-            if (pos.occupent.isWhite === this.isWhite)
-                return false
-        }
+            //is the destenation occupied?
+            if (pos.occupent) {
+                if (pos.occupent.isWhite === this.isWhite)
+                    throw new Error(`can't take your own piece`)
+            }
 
-        //is there another piece in the way? (for pawn's first move too)
-        let here = Piece.destructPosition(this.position);
-        let dest = Piece.destructPosition(pos);
+            //is there another piece in the way? (for pawn's first move too)
+            let here = Piece.destructPosition(this.position);
+            let dest = Piece.destructPosition(pos);
 
-        function isCourseClear(x, y1, y2, Board, reverse) {
-            let count = Math.max(y1, y2) - 1 - Math.min(y1, y2);
-            for (let i = 0; i < count; i++) {
-                let y = Math.min(y2, y1) + 1 + i;
-                let square;
-                if (reverse) {
-                    square = Piece.restructPosition(y, x);
-                } else {
-                    square = Piece.restructPosition(x, y);
+            function isCourseClear(x, y1, y2, Board, reverse) {
+                let count = Math.max(y1, y2) - 1 - Math.min(y1, y2);
+                for (let i = 0; i < count; i++) {
+                    let y = Math.min(y2, y1) + 1 + i;
+                    let square;
+                    if (reverse) {
+                        square = Piece.restructPosition(y, x);
+                    } else {
+                        square = Piece.restructPosition(x, y);
+                    }
+                    if (Board.positions[square].occupent)
+                        return false
                 }
-                if (Board.positions[square].occupent)
-                    return false
+                return true
             }
-            return true
-        }
 
-        if (here.x === dest.x) {
-            if (!isCourseClear(here.x, dest.y, here.y, this.Board))
-                return false
-        }
-        if (here.y === dest.y) {
-            if (!isCourseClear(here.y, dest.x, here.x, this.Board, true))
-                return false
-        }
-        if (here.x - here.y === dest.x - dest.y || here.x - dest.x === dest.y - here.y) {
-            let xCount = Math.abs(here.x - dest.x);
-            for (let i=1; i < xCount; i++) {
-                let x = Math.min(here.x, dest.x)+i;
-                let y = Math.min(here.y, dest.y)+i;
-                let square = Piece.restructPosition(x,y);
-                if (this.Board.positions[square].occupent)
-                    return false
+            if (here.x === dest.x) {
+                if (!isCourseClear(here.x, dest.y, here.y, this.Board))
+                    throw new Error('another vertical piece in the way.')
             }
-        }
-        //did this move result in a check for my king?
+            if (here.y === dest.y) {
+                if (!isCourseClear(here.y, dest.x, here.x, this.Board, true))
+                    throw new Error('another horizantal piece in the way')
+            }
+            if (here.x - here.y === dest.x - dest.y || here.x - dest.x === dest.y - here.y) {
+                let xCount = Math.abs(here.x - dest.x);
+                for (let i = 1; i < xCount; i++) {
+                    let x = Math.min(here.x, dest.x) + i;
+                    let y = Math.min(here.y, dest.y) + i;
+                    let square = Piece.restructPosition(x, y);
+                    if (this.Board.positions[square].occupent)
+                        throw new Error('another piece in the way of diagnal')
+                }
+            }
+            //did this move result in a check for my king?
 
-        return true //authorized!!
+        } catch (err) {
+            console.log(`unauthorized move (${this.type} ${this.position.name} => ${pos.name})\n`, err.message);
+            return false
+        }
+        return true
     }
     move(pos) {
-        if (!this.moveAuthorize(pos)) {
-            console.log(`unauthorized move (${this.type} ${this.position.name} => ${pos.name})`);
-            return false
-        }
+        if (!this.moveAuthorize(pos)) return false
+
         if (pos.occupent) {
-            console.log(`moving the ${this.position.name} ${this.type} to ${pos.name} taking ${pos.occupent.type}`); //this is the same for every piece
+            console.log(`moving the ${this.position.name} ${this.type} to ${pos.name} taking ${pos.occupent.type}`);
             pos.occupent.kill();
         } else {
-            console.log(`moving the ${this.position.name} ${this.type} to ${pos.name}`); //this is the same for every piece
+            console.log(`moving the ${this.position.name} ${this.type} to ${pos.name}`) 
         }
 
         this.#showInBoard(true);
