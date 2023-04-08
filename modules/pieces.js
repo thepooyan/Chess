@@ -58,12 +58,12 @@ class Piece {
     static restructPosition(x, y) {
         return `${String.fromCharCode(x + 64)}${y}`
     }
-    static isCourseClear(x, y1, y2, Board, reverse) {
+    static isCourseClear(x, y1, y2, Board, isRow) {
         let count = Math.max(y1, y2) - 1 - Math.min(y1, y2);
         for (let i = 0; i < count; i++) {
             let y = Math.min(y2, y1) + 1 + i;
             let square;
-            if (reverse) {
+            if (isRow) {
                 square = Piece.restructPosition(y, x);
             } else {
                 square = Piece.restructPosition(x, y);
@@ -161,6 +161,7 @@ class Piece {
         return true
     }
     kill() {
+        this.#showInBoard(true);
         this.isKilled = true;
         this.position = null;
         this.move = null;
@@ -231,18 +232,29 @@ export class King extends Piece {
     moveAuthorize(pos) {
         let patternBackup = this.movePattern;
         let moveShape = Piece.analyseMove(this.position, pos);
+        let whiteOrBlack = this.isWhite ? 'white' : 'black';
 
         if (this.firstMove) {
             if (moveShape === 'rr') {
-                let rRook = this.Board.positions.H1.occupent;
-                if (Piece.isCourseClear(1, 5, 8,this.Board, true) && rRook.firstMove) {
-                    console.log('castle!');
+                let rRook = this.Board.pieces[whiteOrBlack].rook_R;
+                if (Piece.isCourseClear(1, 5, 8, this.Board, true) && rRook.firstMove) {
+                    this.movePattern += '|rr';
+                    setTimeout(() => {
+                        rRook.kill();
+                        this.Board.pieces[whiteOrBlack].rook_R = new Rook(this.Board.positions.F1, this.Board, {isWhite: this.isWhite})
+                        this.Board.pieces[whiteOrBlack].rook_R.firstMove = false;
+                    }, 0);
                 }
             }
             if (moveShape === 'll') {
-                let lRook = this.Board.positions.A1.occupent;
-                if (Piece.isCourseClear(1, 5, 8,this.Board, true) && lRook.firstMove) {
-                    console.log('castle!');
+                let lRook = this.Board.pieces[whiteOrBlack].rook_L;
+                if (Piece.isCourseClear(1, 5, 1, this.Board, true) && lRook.firstMove) {
+                    this.movePattern += '|ll';
+                    setTimeout(() => {
+                        lRook.kill();
+                        this.Board.pieces[whiteOrBlack].rook_L = new Rook(this.Board.positions.D1, this.Board, {isWhite: this.isWhite})
+                        this.Board.pieces[whiteOrBlack].rook_L.firstMove = false;
+                    }, 0);
                 }
             }
 
