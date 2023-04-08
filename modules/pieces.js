@@ -234,13 +234,16 @@ export class King extends Piece {
 
         if (this.firstMove) {
             if (moveShape === 'rr') {
-                console.log('right castle attempt');
                 let rRook = this.Board.positions.H1.occupent;
-
-                console.log(Piece.isCourseClear(1, 5, 8,this.Board, true))
+                if (Piece.isCourseClear(1, 5, 8,this.Board, true) && rRook.firstMove) {
+                    console.log('castle!');
+                }
             }
             if (moveShape === 'll') {
-                console.log('left castle attempt');
+                let lRook = this.Board.positions.A1.occupent;
+                if (Piece.isCourseClear(1, 5, 8,this.Board, true) && lRook.firstMove) {
+                    console.log('castle!');
+                }
             }
 
         }
