@@ -1,13 +1,6 @@
 import { Bishop, King, Knight, Pawn, Queen, Rook } from "./pieces";
 
 export default function setUpBoard(Board, isWhite) {
-    Board.turn = {
-        isWhite: true,
-        change() {
-            this.isWhite = !this.isWhite
-        }
-    }
-    window.p = Board.positions;
 
     window.pawnA = new Pawn(p.A2,Board, {isWhite: isWhite});
     window.pawnB = new Pawn(p.B2,Board, {isWhite: isWhite});

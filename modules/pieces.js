@@ -70,8 +70,8 @@ class Piece {
     moveAuthorize(pos) {
         try {
             //is it my turn?
-            // if (this.Board.turn.isWhite !== this.isWhite)
-            //     return false
+            if (this.Board.turn.isWhite !== this.isWhite)
+                throw new Error(`it's not your move`)
 
             //does the move shape match the move pattern of the piece?
             let moveShape = Piece.analyseMove(this.position, pos);
@@ -149,6 +149,7 @@ class Piece {
         this.#showInBoard();
 
         this.firstMove = false;
+        this.Board.aftermove();
         return true
     }
     kill() {

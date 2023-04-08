@@ -4,14 +4,28 @@ import setUpBoard from '../modules/setUpBoard';
 import './Board.scss';
 import TheFile from './TheFile';
 
-function Board({isWhite}) {
+function Board({ isWhite }) {
 
   Board.positions = {};
+
+  Board.turn = {
+    isWhite: true,
+    change() {
+      this.isWhite = !this.isWhite
+    }
+  }
+  
+  Board.aftermove = () => {
+    Board.turn.change();
+  }
 
   useEffect(() => {
     setUpBoard(Board, isWhite);
     setBoardClicks(Board)
   })
+
+  window.Board = Board;
+  window.p = Board.positions;
 
   return (
     <div id="Board">
