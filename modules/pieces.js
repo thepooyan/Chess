@@ -58,6 +58,21 @@ class Piece {
     static restructPosition(x, y) {
         return `${String.fromCharCode(x + 64)}${y}`
     }
+    static isCourseClear(x, y1, y2, Board, reverse) {
+        let count = Math.max(y1, y2) - 1 - Math.min(y1, y2);
+        for (let i = 0; i < count; i++) {
+            let y = Math.min(y2, y1) + 1 + i;
+            let square;
+            if (reverse) {
+                square = Piece.restructPosition(y, x);
+            } else {
+                square = Piece.restructPosition(x, y);
+            }
+            if (Board.positions[square].occupent)
+                return false
+        }
+        return true
+    }
     #showInBoard(remove) {
         let url = remove ? null : `url("${this.imgAddress}")`;
         this.position.square.style.backgroundImage = url;
@@ -74,8 +89,8 @@ class Piece {
                 throw new Error(`can't stay still :/`)
 
             //is it my turn?
-            if (this.Board.turn.isWhite !== this.isWhite)
-                throw new Error(`it's not your move`)
+            // if (this.Board.turn.isWhite !== this.isWhite)
+            //     throw new Error(`it's not your move`)
 
             //does the move shape match the move pattern of the piece?
             let moveShape = Piece.analyseMove(this.position, pos);
@@ -92,29 +107,15 @@ class Piece {
             let here = Piece.destructPosition(this.position);
             let dest = Piece.destructPosition(pos);
 
-            function isCourseClear(x, y1, y2, Board, reverse) {
-                let count = Math.max(y1, y2) - 1 - Math.min(y1, y2);
-                for (let i = 0; i < count; i++) {
-                    let y = Math.min(y2, y1) + 1 + i;
-                    let square;
-                    if (reverse) {
-                        square = Piece.restructPosition(y, x);
-                    } else {
-                        square = Piece.restructPosition(x, y);
-                    }
-                    if (Board.positions[square].occupent)
-                        return false
-                }
-                return true
-            }
-            //checking rows
+
+            //checking columns
             if (here.x === dest.x) {
-                if (!isCourseClear(here.x, dest.y, here.y, this.Board))
+                if (!Piece.isCourseClear(here.x, dest.y, here.y, this.Board))
                     throw new Error('another vertical piece in the way.')
             }
-            //checking columns
+            //checking rows
             if (here.y === dest.y) {
-                if (!isCourseClear(here.y, dest.x, here.x, this.Board, true))
+                if (!Piece.isCourseClear(here.y, dest.x, here.x, this.Board, true))
                     throw new Error('another horizantal piece in the way')
             }
             //checking diagnals
@@ -144,7 +145,7 @@ class Piece {
             console.log(`moving the ${this.position.name} ${this.type} to ${pos.name} taking ${pos.occupent.type}`);
             pos.occupent.kill();
         } else {
-            console.log(`moving the ${this.position.name} ${this.type} to ${pos.name}`) 
+            console.log(`moving the ${this.position.name} ${this.type} to ${pos.name}`)
         }
 
         this.#showInBoard(true);
@@ -236,6 +237,7 @@ export class King extends Piece {
                 console.log('right castle attempt');
                 let rRook = this.Board.positions.H1.occupent;
 
+                console.log(Piece.isCourseClear(1, 5, 8,this.Board, true))
             }
             if (moveShape === 'll') {
                 console.log('left castle attempt');
