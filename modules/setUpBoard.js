@@ -27,21 +27,21 @@ export default function setUpBoard(Board, isWhite) {
     window.queen = new Queen(p.D1,Board, {isWhite: isWhite});
 
 
-    window.B_pawnA = new Pawn(p.A7,Board, {isWhite: !isWhite});
-    window.B_pawnB = new Pawn(p.B7,Board, {isWhite: !isWhite});
-    window.B_pawnC = new Pawn(p.C7,Board, {isWhite: !isWhite});
-    window.B_pawnD = new Pawn(p.D7,Board, {isWhite: !isWhite});
-    window.B_pawnE = new Pawn(p.E7,Board, {isWhite: !isWhite});
-    window.B_pawnF = new Pawn(p.F7,Board, {isWhite: !isWhite});
-    window.B_pawnG = new Pawn(p.G7,Board, {isWhite: !isWhite});
-    window.B_pawnH = new Pawn(p.H7,Board, {isWhite: !isWhite});
-    window.B_Lknight = new Knight(p.B8,Board, {isWhite: !isWhite});
-    window.B_Rknight = new Knight(p.G8,Board, {isWhite: !isWhite});
-    window.B_Lrook = new Rook(p.A8,Board, {isWhite: !isWhite});
-    window.B_Rrook = new Rook(p.H8,Board, {isWhite: !isWhite});
-    window.B_Lbishop = new Bishop(p.C8,Board, {isWhite: !isWhite});
-    window.B_Rbishop = new Bishop(p.F8,Board, {isWhite: !isWhite});
-    window.B_king = new King(p.E8,Board, {isWhite: !isWhite});
-    window.B_queen = new Queen(p.D8,Board, {isWhite: !isWhite});
+    window.o_pawnA = new Pawn(p.A7,Board, {isWhite: !isWhite});
+    window.o_pawnB = new Pawn(p.B7,Board, {isWhite: !isWhite});
+    window.o_pawnC = new Pawn(p.C7,Board, {isWhite: !isWhite});
+    window.o_pawnD = new Pawn(p.D7,Board, {isWhite: !isWhite});
+    window.o_pawnE = new Pawn(p.E7,Board, {isWhite: !isWhite});
+    window.o_pawnF = new Pawn(p.F7,Board, {isWhite: !isWhite});
+    window.o_pawnG = new Pawn(p.G7,Board, {isWhite: !isWhite});
+    window.o_pawnH = new Pawn(p.H7,Board, {isWhite: !isWhite});
+    window.o_Lknight = new Knight(p.B8,Board, {isWhite: !isWhite});
+    window.o_Rknight = new Knight(p.G8,Board, {isWhite: !isWhite});
+    window.o_Lrook = new Rook(p.A8,Board, {isWhite: !isWhite});
+    window.o_Rrook = new Rook(p.H8,Board, {isWhite: !isWhite});
+    window.o_Lbishop = new Bishop(p.C8,Board, {isWhite: !isWhite});
+    window.o_Rbishop = new Bishop(p.F8,Board, {isWhite: !isWhite});
+    window.o_king = new King(p.E8,Board, {isWhite: !isWhite});
+    window.o_queen = new Queen(p.D8,Board, {isWhite: !isWhite});
     
 }

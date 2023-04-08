@@ -133,18 +133,19 @@ export class Pawn extends Piece {
         if (this.firstMove) {
             this.movePattern += '|uu';
         }
-        let res = super.moveAuthorize(pos);
+
+        let result = super.moveAuthorize(pos);
         //reset the move pattern after the move is done
         this.movePattern = patternBackup;
 
-        if (res && /.8/.test(pos.name)) {
+        if (result && /.8/.test(pos.name)) {
             setTimeout(() => {
                 new Queen(this.position, this.Board, { isWhite: this.isWhite });
                 this.kill();
             }, 0);
         }
 
-        return res
+        return result
     }
 }
 
@@ -175,5 +176,23 @@ export class Queen extends Piece {
 export class King extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
         super('King', position, isWhite, 'u|d|r|l|[ud][lr]', Board);
+    }
+    moveAuthorize(pos) {
+        let patternBackup = this.movePattern;
+        let moveShape = Piece.analyseMove(this.position, pos);
+
+        if (this.firstMove) {
+            if (moveShape === 'rr') {
+                console.log('right castle attempt');
+                let rRook = this.Board.positions.H1.occupent;
+                
+            }
+            if (moveShape === 'll') {
+                console.log('left castle attempt');
+            }
+
+        }
+
+        return super.moveAuthorize(pos);
     }
 }
