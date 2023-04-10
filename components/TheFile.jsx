@@ -9,9 +9,11 @@ export default function TheFile(props) {
 
         }
     })
+    let rows = [0,1,2,3,4,5,6,7];
+    if (props.isWhite) rows = rows.slice().reverse();
     return (
         <div>
-            {[0,1,2,3,4,5,6,7].map(i=>{
+            {rows.map(i=>{
                 return <div id={`${props.children}${i+1}`} ref={file[i]} key={i}></div>
             })}
         </div>

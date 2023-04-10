@@ -22,18 +22,21 @@ function Board({ isWhite }) {
   }
 
   useEffect(() => {
-    setUpBoard(Board, isWhite);
+    setUpBoard(Board);
     setBoardClicks(Board)
   })
 
   window.Board = Board;
   window.p = Board.positions;
 
+  let cols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+  if (!isWhite) cols = cols.slice().reverse();
+
   return (
     <div id="Board">
-      {['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'].map(item=>{
+      {cols.map(item=>{
         return (
-          <TheFile position={Board.positions} key={item}>{item}</TheFile>
+          <TheFile position={Board.positions} key={item} isWhite={isWhite}>{item}</TheFile>
         )
       })}
     </div>
