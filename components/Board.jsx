@@ -15,6 +15,7 @@ function Board({ isWhite }) {
       this.isWhite = !this.isWhite
     }
   }
+  Board.isWhite = isWhite;
 
   Board.aftermove = () => {
     Board.turn.change();

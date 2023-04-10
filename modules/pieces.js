@@ -170,20 +170,22 @@ class Piece {
 
 export class Pawn extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
-        super("Pawn", position, isWhite, 'u', Board);
+        let forwardSymbole = Board.isWhite === isWhite ? 'u' : 'd';
+        super("Pawn", position, isWhite,forwardSymbole, Board);
+        this.forwardSymbole = forwardSymbole;
     }
     moveAuthorize(pos) {
         let patternBackup = this.movePattern;
         let moveShape = Piece.analyseMove(this.position, pos);
 
-        if (moveShape === 'u' && pos.occupent) {
+        if (moveShape === `${this.forwardSymbole}` && pos.occupent) {
             this.movePattern = ''
         }
-        if ((moveShape === 'ur' || moveShape === 'ul') && pos.occupent) {
-            this.movePattern += '|ur|ul'
+        if ((moveShape === `${this.forwardSymbole}r` || moveShape === `${this.forwardSymbole}l`) && pos.occupent) {
+            this.movePattern += `|${this.forwardSymbole}r|${this.forwardSymbole}l`
         }
         if (this.firstMove) {
-            this.movePattern += '|uu';
+            this.movePattern += `|${this.forwardSymbole}${this.forwardSymbole}`;
         }
 
         let result = super.moveAuthorize(pos);
@@ -241,7 +243,7 @@ export class King extends Piece {
                     this.movePattern += '|rr';
                     setTimeout(() => {
                         rRook.kill();
-                        this.Board.pieces[whiteOrBlack].rook_R = new Rook(this.Board.positions.F1, this.Board, {isWhite: this.isWhite})
+                        this.Board.pieces[whiteOrBlack].rook_R = new Rook(this.Board.positions.F1, this.Board, { isWhite: this.isWhite })
                         this.Board.pieces[whiteOrBlack].rook_R.firstMove = false;
                     }, 0);
                 }
@@ -252,7 +254,7 @@ export class King extends Piece {
                     this.movePattern += '|ll';
                     setTimeout(() => {
                         lRook.kill();
-                        this.Board.pieces[whiteOrBlack].rook_L = new Rook(this.Board.positions.D1, this.Board, {isWhite: this.isWhite})
+                        this.Board.pieces[whiteOrBlack].rook_L = new Rook(this.Board.positions.D1, this.Board, { isWhite: this.isWhite })
                         this.Board.pieces[whiteOrBlack].rook_L.firstMove = false;
                     }, 0);
                 }
