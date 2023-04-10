@@ -11,14 +11,9 @@ export default function TheFile(props) {
     })
     return (
         <div>
-            <div id={`${props.children}${8}`} ref={file[7]}></div>
-            <div id={`${props.children}${7}`} ref={file[6]}></div>
-            <div id={`${props.children}${6}`} ref={file[5]}></div>
-            <div id={`${props.children}${5}`} ref={file[4]}></div>
-            <div id={`${props.children}${4}`} ref={file[3]}></div>
-            <div id={`${props.children}${3}`} ref={file[2]}></div>
-            <div id={`${props.children}${2}`} ref={file[1]}></div>
-            <div id={`${props.children}${1}`} ref={file[0]}></div>
+            {[0,1,2,3,4,5,6,7].map(i=>{
+                return <div id={`${props.children}${i+1}`} ref={file[i]} key={i}></div>
+            })}
         </div>
     )
 }
