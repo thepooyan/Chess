@@ -31,14 +31,11 @@ function Board({ isWhite }) {
 
   return (
     <div id="Board">
-      <TheFile position={Board.positions}>A</TheFile>
-      <TheFile position={Board.positions}>B</TheFile>
-      <TheFile position={Board.positions}>C</TheFile>
-      <TheFile position={Board.positions}>D</TheFile>
-      <TheFile position={Board.positions}>E</TheFile>
-      <TheFile position={Board.positions}>F</TheFile>
-      <TheFile position={Board.positions}>G</TheFile>
-      <TheFile position={Board.positions}>H</TheFile>
+      {['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'].map(item=>{
+        return (
+          <TheFile position={Board.positions} key={item}>{item}</TheFile>
+        )
+      })}
     </div>
   )
 }
