@@ -148,6 +148,13 @@ class Piece {
             console.log(`moving the ${this.position.name} ${this.type} to ${pos.name}`)
         }
 
+        this.transport(pos);
+
+        this.firstMove = false;
+        this.Board.aftermove();
+        return true
+    }
+    transport(pos) {
         this.#showInBoard(true);
         this.position.occupent = null;
 
@@ -155,10 +162,6 @@ class Piece {
 
         this.position.occupent = this;
         this.#showInBoard();
-
-        this.firstMove = false;
-        this.Board.aftermove();
-        return true
     }
     kill() {
         this.#showInBoard(true);
@@ -228,6 +231,7 @@ export class Queen extends Piece {
 }
 
 export class King extends Piece {
+    rookTransport = false;
     constructor(position, Board, { isWhite } = { isWhite: true }) {
         super('King', position, isWhite, 'u|d|r|l|[ud][lr]', Board);
     }
@@ -244,11 +248,7 @@ export class King extends Piece {
                 let rookP = Piece.destructPosition(rook.position);
                 if (Piece.isCourseClear(kingP.y, kingP.x, rookP.x , this.Board, true) && rook.firstMove) {
                     this.movePattern += '|rr';
-                    setTimeout(() => {
-                        rook.kill();
-                        this.Board.pieces[whiteOrBlack].rook_R = new Rook(this.Board.positions[`F${kingP.y}`], this.Board, { isWhite: this.isWhite })
-                        this.Board.pieces[whiteOrBlack].rook_R.firstMove = false;
-                    }, 0);
+                    this.rookTransport = {place: this.Board.positions[`F${kingP.y}`], rook: rook};
                 }
             }
             if (moveShape === 'll') {
@@ -256,11 +256,7 @@ export class King extends Piece {
                 let rookP = Piece.destructPosition(rook.position);
                 if (Piece.isCourseClear(kingP.y, kingP.x, rookP.x , this.Board, true) && rook.firstMove) {
                     this.movePattern += '|ll';
-                    setTimeout(() => {
-                        rook.kill();
-                        this.Board.pieces[whiteOrBlack].rook_L = new Rook(this.Board.positions[`D${kingP.y}`], this.Board, { isWhite: this.isWhite })
-                        this.Board.pieces[whiteOrBlack].rook_L.firstMove = false;
-                    }, 0);
+                    this.rookTransport = {place: this.Board.positions[`D${kingP.y}`], rook: rook};
                 }
             }
 
@@ -271,5 +267,18 @@ export class King extends Piece {
         }, 0);
 
         return super.moveAuthorize(pos);
+    }
+    move(pos) {
+        let move = super.move(pos);
+        if (move) {
+            this.aftermove();
+        }
+        return move
+    }
+    aftermove() {
+        if (this.rookTransport) {
+            this.rookTransport.rook.transport(this.rookTransport.place);
+            this.rookTransport = false;
+        }
     }
 }
