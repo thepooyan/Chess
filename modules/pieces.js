@@ -89,8 +89,8 @@ class Piece {
                 throw new Error(`can't stay still :/`)
 
             //is it my turn?
-            // if (this.Board.turn.isWhite !== this.isWhite)
-            //     throw new Error(`it's not your move`)
+            if (this.Board.turn.isWhite !== this.isWhite)
+                throw new Error(`it's not your move`)
 
             //does the move shape match the move pattern of the piece?
             let moveShape = Piece.analyseMove(this.position, pos);
