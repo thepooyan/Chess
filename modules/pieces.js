@@ -46,6 +46,7 @@ class Piece {
                 x--;
             }
         }
+        console.log(moveShape);
         return moveShape
     }
     static destructPosition(position) {
@@ -170,7 +171,7 @@ class Piece {
 
 export class Pawn extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
-        let forwardSymbole = Board.isWhite === isWhite ? 'u' : 'd';
+        let forwardSymbole = isWhite ? 'u' : 'd';
         super("Pawn", position, isWhite,forwardSymbole, Board);
         this.forwardSymbole = forwardSymbole;
     }
