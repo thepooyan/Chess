@@ -140,12 +140,13 @@ class Piece {
     }
     move(pos) {
         if (!this.moveAuthorize(pos)) return false
+        let whiteOrBlack = this.isWhite ? 'white' : 'black';
 
         if (pos.occupent) {
-            console.log(`moving the ${this.position.name} ${this.type} to ${pos.name} taking ${pos.occupent.type}`);
+            console.log(`${whiteOrBlack} moving the ${this.position.name} ${this.type} to ${pos.name} taking ${pos.occupent.type}`);
             pos.occupent.kill();
         } else {
-            console.log(`moving the ${this.position.name} ${this.type} to ${pos.name}`)
+            console.log(`${whiteOrBlack} moving the ${this.position.name} ${this.type} to ${pos.name}`)
         }
 
         this.transport(pos);
