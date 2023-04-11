@@ -46,7 +46,6 @@ class Piece {
                 x--;
             }
         }
-        console.log(moveShape);
         return moveShape
     }
     static destructPosition(position) {
@@ -238,30 +237,38 @@ export class King extends Piece {
         let whiteOrBlack = this.isWhite ? 'white' : 'black';
 
         if (this.firstMove) {
+            let kingP = Piece.destructPosition(this.position);
+
             if (moveShape === 'rr') {
-                let rRook = this.Board.pieces[whiteOrBlack].rook_R;
-                if (Piece.isCourseClear(1, 5, 8, this.Board, true) && rRook.firstMove) {
+                let rook = this.Board.pieces[whiteOrBlack].rook_R;
+                let rookP = Piece.destructPosition(rook.position);
+                if (Piece.isCourseClear(kingP.y, kingP.x, rookP.x , this.Board, true) && rook.firstMove) {
                     this.movePattern += '|rr';
                     setTimeout(() => {
-                        rRook.kill();
-                        this.Board.pieces[whiteOrBlack].rook_R = new Rook(this.Board.positions.F1, this.Board, { isWhite: this.isWhite })
+                        rook.kill();
+                        this.Board.pieces[whiteOrBlack].rook_R = new Rook(this.Board.positions[`F${kingP.y}`], this.Board, { isWhite: this.isWhite })
                         this.Board.pieces[whiteOrBlack].rook_R.firstMove = false;
                     }, 0);
                 }
             }
             if (moveShape === 'll') {
-                let lRook = this.Board.pieces[whiteOrBlack].rook_L;
-                if (Piece.isCourseClear(1, 5, 1, this.Board, true) && lRook.firstMove) {
+                let rook = this.Board.pieces[whiteOrBlack].rook_L;
+                let rookP = Piece.destructPosition(rook.position);
+                if (Piece.isCourseClear(kingP.y, kingP.x, rookP.x , this.Board, true) && rook.firstMove) {
                     this.movePattern += '|ll';
                     setTimeout(() => {
-                        lRook.kill();
-                        this.Board.pieces[whiteOrBlack].rook_L = new Rook(this.Board.positions.D1, this.Board, { isWhite: this.isWhite })
+                        rook.kill();
+                        this.Board.pieces[whiteOrBlack].rook_L = new Rook(this.Board.positions[`D${kingP.y}`], this.Board, { isWhite: this.isWhite })
                         this.Board.pieces[whiteOrBlack].rook_L.firstMove = false;
                     }, 0);
                 }
             }
 
         }
+
+        setTimeout(() => {
+            this.movePattern = patternBackup;
+        }, 0);
 
         return super.moveAuthorize(pos);
     }
