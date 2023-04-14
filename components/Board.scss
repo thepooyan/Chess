@@ -41,11 +41,25 @@
                         border-radius: 50%;
                     }
                 }
+                &.selected {
+                    background-color: var(--color2H);
+                }
+                &:nth-child(2n).selected {
+                    background-color: var(--color1H);
+                }
             }
 
-
+            &:nth-child(2n) {
+                >div {
+                    &.selected {
+                        background-color: var(--color1H);
+                    }
+                    &:nth-child(2n).selected {
+                        background-color: var(--color2H);
+                    }
+                }
+            }
         }
-
     }
 
     .background {
@@ -57,34 +71,17 @@
             >div {
                 background-color: var(--color2);
 
-                &.selected {
-                    background-color: var(--color2H);
-                }
-
                 &:nth-child(2n) {
                     background-color: var(--color1);
-
-                    &.selected {
-                        background-color: var(--color1H);
-                    }
                 }
             }
 
             &:nth-child(2n) {
-                >div {
-                    //square on an even file
+                >div { //square on an even file
                     background-color: var(--color1);
-
-                    &.selected {
-                        background-color: var(--color1H);
-                    }
 
                     &:nth-child(2n) {
                         background-color: var(--color2);
-
-                        &.selected {
-                            background-color: var(--color2H);
-                        }
                     }
                 }
             }
