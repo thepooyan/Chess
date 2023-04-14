@@ -149,11 +149,25 @@ class Piece {
             console.log(`${whiteOrBlack} moving the ${this.position.name} ${this.type} to ${pos.name}`)
         }
 
-        this.transport(pos);
+        this.animate(pos);
 
         this.firstMove = false;
         this.Board.aftermove();
         return true
+    }
+    animate(pos) {
+        let here = Piece.destructPosition(this.position);
+        let dest = Piece.destructPosition(pos);
+        let x = dest.x - here.x;
+        let y = here.y - dest.y;
+        x = x * 100;
+        y = y * 100;
+        let movingSquare = this.position.square;
+        movingSquare.style.transform = `translate(${x}px, ${y}px)`;
+        movingSquare.addEventListener('transitionend', ()=>{
+            this.transport(pos);
+            movingSquare.style.transform = '';
+        })
     }
     transport(pos) {
         this.#showInBoard(true);

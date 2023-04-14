@@ -25,6 +25,7 @@
             >div {
                 //square
                 background-size: contain;
+                transition: .1s;
                 &.occupied {
                     cursor: pointer;
                 }
