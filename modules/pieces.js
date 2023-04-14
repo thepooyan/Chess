@@ -160,6 +160,9 @@ class Piece {
         let dest = Piece.destructPosition(pos);
         let x = dest.x - here.x;
         let y = here.y - dest.y;
+        if (!this.Board.isWhite) {
+            x = -x;y = -y;
+        }
         x = x * 100;
         y = y * 100;
         let movingSquare = this.position.square;
