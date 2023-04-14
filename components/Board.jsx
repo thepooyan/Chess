@@ -4,6 +4,7 @@ import setUpBoard from '../modules/setUpBoard';
 import Timer from '../modules/Timer';
 import './Board.scss';
 import TheFile from './TheFile';
+import TheFileAlt from './TheFileAlt';
 
 function Board({ isWhite, timer }) {
 
@@ -83,7 +84,7 @@ function Board({ isWhite, timer }) {
       
       <div className="background">
         {cols.map(item => {
-          return <TheFile key={item} isWhite={isWhite} noRef={true}>{item}</TheFile>
+          return <TheFileAlt position={Board.positions} key={item} isWhite={isWhite} noRef={true}>{item}</TheFileAlt>
         })}
       </div>
     </div>

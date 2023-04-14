@@ -1,14 +1,13 @@
 import { useEffect, useRef } from "react"
 
-export default function TheFile(props) {
+export default function TheFileAlt(props) {
     let file = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
 
-        useEffect(() => {
-            for (let i = 1; i < 9; i++) {
-                props.position[`${props.children}${i}`] = { square: file[i - 1].current, name: `${props.children}${i}` };
-
-            }
-        })
+    useEffect(() => {
+        for (let i = 1; i < 9; i++) {
+            props.position[`${props.children}${i}`].background = file[i - 1].current;
+        }
+    })
     let rows = [0, 1, 2, 3, 4, 5, 6, 7];
     if (props.isWhite) rows = rows.slice().reverse();
     return (
