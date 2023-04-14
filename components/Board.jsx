@@ -73,12 +73,19 @@ function Board({ isWhite, timer }) {
 
   return (
     <div id="Board">
-      {cols.map(item => {
-        return (
-          <TheFile position={Board.positions} key={item} isWhite={isWhite}>{item}</TheFile>
-        )
-      })}
-
+      <div className="pieces">
+        {cols.map(item => {
+          return (
+            <TheFile position={Board.positions} key={item} isWhite={isWhite}>{item}</TheFile>
+          )
+        })}
+      </div>
+      
+      <div className="background">
+        {cols.map(item => {
+          return <TheFile key={item} isWhite={isWhite} noRef={true}>{item}</TheFile>
+        })}
+      </div>
     </div>
   )
 }
