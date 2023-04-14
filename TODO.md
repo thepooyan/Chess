@@ -19,3 +19,8 @@
 - should img address be static to each piece class?
 - how to make kill and authIntersect methods private?
 - after moving programmiticly the click breaks
+
+-----TO PRESENT
+- clock
+- start form
+- possible moves?
