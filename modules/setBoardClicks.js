@@ -7,17 +7,17 @@ export default function setBoardClicks(Board) {
             position.square.onclick = _ => {
                 let piece = position.occupent;
                 Object.values(Board.positions).forEach(pos=>{
-                    pos.square.classList.remove('selected')
+                    pos.background.classList.remove('selected')
                 })
-                position.square.classList.add('selected');
+                position.background.classList.add('selected');
 
                 Object.values(Board.positions).forEach(position2 => {
                     position2.square.onclick = e => {
                         let moved = piece.move(position2);
                         if (moved)
-                        position2.square.classList.add('selected');
+                        position2.background.classList.add('selected');
                         else
-                        position.square.classList.remove('selected');
+                        position.background.classList.remove('selected');
 
                         setBoardClicks(Board);
                     }

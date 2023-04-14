@@ -25,6 +25,21 @@
             >div {
                 //square
                 background-size: contain;
+                &.occupied {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .background {
+        position: absolute;
+        top: 0;
+        z-index: -1;
+
+        >div { //file
+            >div {//square
+                background-color: var(--color2);
 
                 &.dot {
                     display: flex;
@@ -41,22 +56,6 @@
                         border-radius: 50%;
                     }
                 }
-            }
-
-
-        }
-
-    }
-
-    .background {
-        position: absolute;
-        top: 0;
-        z-index: -1;
-
-        >div {
-            >div {
-                background-color: var(--color2);
-
                 &.selected {
                     background-color: var(--color2H);
                 }
