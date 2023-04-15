@@ -8,11 +8,11 @@ class Piece {
     isKilled = false;
     firstMove = true;
 
-    constructor(type, position, isWhite, movePattern, Board) {
+    constructor(position, isWhite, movePattern, Board) {
         position.occupent = this;
         this.position = position;
         this.isWhite = isWhite;
-        this.type = type;
+        this.type = this.constructor.name;
         this.Board = Board;
         this.movePattern = movePattern;
         this.imgAddress = imgFolder + `${this.isWhite ? 'w' : 'b'}${this.type}.png`;
@@ -192,7 +192,7 @@ class Piece {
 export class Pawn extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
         let forwardSymbole = isWhite ? 'u' : 'd';
-        super("Pawn", position, isWhite,forwardSymbole, Board);
+        super(position, isWhite,forwardSymbole, Board);
         this.forwardSymbole = forwardSymbole;
     }
     moveAuthorize(pos) {
@@ -226,32 +226,32 @@ export class Pawn extends Piece {
 
 export class Knight extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
-        super('Knight', position, isWhite, '([ud])[lr]\\2|[du][lr]{2}', Board);
+        super(position, isWhite, '([ud])[lr]\\2|[du][lr]{2}', Board);
     }
 }
 
 export class Bishop extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
-        super('Bishop', position, isWhite, '([ud][lr])+', Board);
+        super(position, isWhite, '([ud][lr])+', Board);
     }
 }
 
 export class Rook extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
-        super('Rook', position, isWhite, 'u+|d+|l+|r+', Board);
+        super(position, isWhite, 'u+|d+|l+|r+', Board);
     }
 }
 
 export class Queen extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
-        super('Queen', position, isWhite, '(u+|d+|l+|r+)|(([ud][lr])+)', Board);
+        super(position, isWhite, '(u+|d+|l+|r+)|(([ud][lr])+)', Board);
     }
 }
 
 export class King extends Piece {
     rookTransport = false;
     constructor(position, Board, { isWhite } = { isWhite: true }) {
-        super('King', position, isWhite, 'u|d|r|l|[ud][lr]', Board);
+        super(position, isWhite, 'u|d|r|l|[ud][lr]', Board);
     }
     moveAuthorize(pos) {
         let patternBackup = this.movePattern;
