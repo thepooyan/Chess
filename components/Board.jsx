@@ -5,8 +5,9 @@ import Timer from '../modules/Timer';
 import './Board.scss';
 import TheFile from './TheFile';
 import TheFileAlt from './TheFileAlt';
+import PlayerInfo from "../components/PlayerInfo";
 
-function Board({ isWhite, timer }) {
+function Board({ isWhite, timer, player1, player2 }) {
 
   Board.positions = {};
   Board.pieces = { white: {}, black: {} }
@@ -71,9 +72,12 @@ function Board({ isWhite, timer }) {
 
   let cols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
   if (!isWhite) cols = cols.slice().reverse();
-
+  
   return (
     <div id="Board">
+
+      <PlayerInfo name={player2.name} rating={player2.rating} />
+
       <div className="pieces">
         {cols.map(item => {
           return (
@@ -87,6 +91,9 @@ function Board({ isWhite, timer }) {
           return <TheFileAlt position={Board.positions} key={item} isWhite={isWhite} noRef={true}>{item}</TheFileAlt>
         })}
       </div>
+
+      <PlayerInfo name={player1.name} rating={player1.rating} />
+
     </div>
   )
 }
