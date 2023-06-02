@@ -88,7 +88,7 @@ function Board({ isWhite, timer, player1, player2 }) {
 
   return (
     <div id="BoardWrapper">
-      <PlayerInfo name={player2.name} rating={player2.rating} reverse={Board.isWhite} clockRef={Board.isWhite ? Board.clock.blackRef : Board.clock.whiteRef} />
+      <PlayerInfo name={player2.name} rating={player2.rating} reverse={Board.isWhite} clockRef={Board.isWhite ? Board.clock.blackRef : Board.clock.whiteRef} initTime={Board.clock.white.getString} />
       <div id="Board">
         <div className="pieces">
           {cols.map(item => {
@@ -103,7 +103,7 @@ function Board({ isWhite, timer, player1, player2 }) {
           })}
         </div>
       </div>
-      <PlayerInfo name={player1.name} rating={player1.rating} reverse={!Board.isWhite} clockRef={!Board.isWhite ? Board.clock.blackRef : Board.clock.whiteRef} />
+      <PlayerInfo name={player1.name} rating={player1.rating} reverse={!Board.isWhite} clockRef={!Board.isWhite ? Board.clock.blackRef : Board.clock.whiteRef} initTime={Board.clock.white.getString} />
     </div>
   )
 }

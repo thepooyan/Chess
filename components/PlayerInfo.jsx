@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import './PlayerInfo.scss'
 
-const PlayerInfo = ({ name, rating, picAddress, reverse, clockRef }) => {
+const PlayerInfo = ({ name, rating, picAddress, reverse, clockRef, initTime }) => {
 
   const picSrc = picAddress ? picAddress : "/anonymous_player.gif";
 
@@ -9,7 +9,7 @@ const PlayerInfo = ({ name, rating, picAddress, reverse, clockRef }) => {
     <section className="playerInfo">
       <img src={picSrc} />
       <div>{name}<span>({rating})</span></div>
-      <div ref={clockRef} className={`clock deactive${reverse ? ' ops' : ''}`}>5:00</div>
+      <div ref={clockRef} className={`clock deactive ${reverse ? 'ops' : ''}`}>{initTime}</div>
     </section>
   )
 }
