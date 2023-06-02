@@ -72,28 +72,25 @@ function Board({ isWhite, timer, player1, player2 }) {
 
   let cols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
   if (!isWhite) cols = cols.slice().reverse();
-  
+
   return (
-    <div id="Board">
-
+    <div id="BoardWrapper">
       <PlayerInfo name={player2.name} rating={player2.rating} />
-
-      <div className="pieces">
-        {cols.map(item => {
-          return (
-            <TheFile position={Board.positions} key={item} isWhite={isWhite}>{item}</TheFile>
-          )
-        })}
+      <div id="Board">
+        <div className="pieces">
+          {cols.map(item => {
+            return (
+              <TheFile position={Board.positions} key={item} isWhite={isWhite}>{item}</TheFile>
+            )
+          })}
+        </div>
+        <div className="background">
+          {cols.map(item => {
+            return <TheFileAlt position={Board.positions} key={item} isWhite={isWhite} noRef={true}>{item}</TheFileAlt>
+          })}
+        </div>
       </div>
-      
-      <div className="background">
-        {cols.map(item => {
-          return <TheFileAlt position={Board.positions} key={item} isWhite={isWhite} noRef={true}>{item}</TheFileAlt>
-        })}
-      </div>
-
       <PlayerInfo name={player1.name} rating={player1.rating} />
-
     </div>
   )
 }

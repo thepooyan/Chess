@@ -1,93 +1,103 @@
-#Board {
-    --color2: #EEEED2;
-    --color1: #769656;
-    --color2H: #F6F668;
-    --color1H: #BBCA2A;
-
-    --BoardSize: 800px;
-    width: var(--BoardSize);
-    height: var(--BoardSize);
+#BoardWrapper {
+    width: max-content;
     margin: auto;
-    position: relative;
 
-    .pieces,
-    .background {
-        display: grid;
-        grid-template-columns: repeat(8, 1fr);
-        height: 100%;
-        width: 100%;
+    #Board {
+        --color2: #EEEED2;
+        --color1: #769656;
+        --color2H: #F6F668;
+        --color1H: #BBCA2A;
 
-        >div {
-            //file
+        --BoardSize: 800px;
+        width: var(--BoardSize);
+        height: var(--BoardSize);
+        position: relative;
+
+        .pieces,
+        .background {
             display: grid;
-            grid-template-rows: repeat(8, 1fr);
+            grid-template-columns: repeat(8, 1fr);
+            height: 100%;
+            width: 100%;
 
             >div {
-                //square
-                background-size: contain;
-                transition: .1s;
-                &.occupied {
-                    cursor: pointer;
+                //file
+                display: grid;
+                grid-template-rows: repeat(8, 1fr);
+
+                >div {
+                    //square
+                    background-size: contain;
+                    transition: .1s;
+
+                    &.occupied {
+                        cursor: pointer;
+                    }
                 }
             }
         }
-    }
 
-    .background {
-        position: absolute;
-        top: 0;
-        z-index: -1;
+        .background {
+            position: absolute;
+            top: 0;
+            z-index: -1;
 
-        >div { //file
-            >div {//square
-                background-color: var(--color2);
+            >div {
 
-                &.dot {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    position: relative;
-
-                    &::after {
-                        content: "";
-                        width: 30%;
-                        height: 30%;
-                        background-color: #0000001c;
-                        position: absolute;
-                        border-radius: 50%;
-                    }
-                }
-                &.selected {
-                    background-color: var(--color2H);
-                }
-
-                &:nth-child(2n) {
-                    background-color: var(--color1);
-
-                    &.selected {
-                        background-color: var(--color1H);
-                    }
-                }
-            }
-
-            &:nth-child(2n) {
+                //file
                 >div {
-                    //square on an even file
-                    background-color: var(--color1);
+                    //square
+                    background-color: var(--color2);
+
+                    &.dot {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        position: relative;
+
+                        &::after {
+                            content: "";
+                            width: 30%;
+                            height: 30%;
+                            background-color: #0000001c;
+                            position: absolute;
+                            border-radius: 50%;
+                        }
+                    }
 
                     &.selected {
-                        background-color: var(--color1H);
+                        background-color: var(--color2H);
                     }
 
                     &:nth-child(2n) {
-                        background-color: var(--color2);
+                        background-color: var(--color1);
 
                         &.selected {
-                            background-color: var(--color2H);
+                            background-color: var(--color1H);
+                        }
+                    }
+                }
+
+                &:nth-child(2n) {
+                    >div {
+                        //square on an even file
+                        background-color: var(--color1);
+
+                        &.selected {
+                            background-color: var(--color1H);
+                        }
+
+                        &:nth-child(2n) {
+                            background-color: var(--color2);
+
+                            &.selected {
+                                background-color: var(--color2H);
+                            }
                         }
                     }
                 }
             }
         }
     }
+
 }
