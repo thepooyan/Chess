@@ -75,7 +75,7 @@ function Board({ isWhite, timer, player1, player2 }) {
 
   return (
     <div id="BoardWrapper">
-      <PlayerInfo name={player2.name} rating={player2.rating} />
+      <PlayerInfo name={player2.name} rating={player2.rating} reverse={true}/>
       <div id="Board">
         <div className="pieces">
           {cols.map(item => {

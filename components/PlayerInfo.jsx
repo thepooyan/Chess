@@ -1,14 +1,15 @@
 import React from 'react'
 import './PlayerInfo.scss'
 
-const PlayerInfo = ({name, rating, picAddress}) => {
+const PlayerInfo = ({name, rating, picAddress, reverse}) => {
 
     const picSrc = picAddress ? picAddress : "/anonymous_player.gif";
 
   return (
-    <section className='playerInfo'>
+    <section className="playerInfo">
         <img src={picSrc} />
         <div>{name}<span>({rating})</span></div>
+        <div className={`clock ${reverse?'ops':''}`}>5:00</div>
     </section>
   )
 }

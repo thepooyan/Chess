@@ -12,11 +12,39 @@
 
     div {
         padding: .1em 0;
+
         span {
             font-weight: bold;
             padding-left: .2em;
             font-family: patrickHand;
             font-size: 1.1em;
         }
+    }
+
+    .clock {
+        //back active #989795
+        //black deactive #2B2825
+        //white deactive #989795
+        //white active white
+        --white: white;
+        --black: #262421;
+        margin-left: auto;
+        background-color: var(--black);
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        padding: 0.2em 2.2em;
+        font-size: 1.8em;
+        border-radius: 0.1em;
+
+        &.deactive {
+            opacity: 0.3;
+        }
+
+        &.ops {
+            background-color: var(--white);
+            color: var(--black);
+        }
+        
     }
 }
