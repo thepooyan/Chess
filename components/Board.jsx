@@ -67,11 +67,11 @@ function Board({ isWhite, timer, player1, player2 }) {
   }
 
   Board.clock.white.onfinish = _ => {
-    console.log('white lost on time')
+    alert('white lost on time')
     Board.clock.kill();
   }
   Board.clock.black.onfinish = _ => {
-    console.log('black lost on time')
+    alert('black lost on time')
     Board.clock.kill();
   }
 

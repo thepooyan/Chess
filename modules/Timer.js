@@ -8,9 +8,9 @@ export default class Timer {
 
     start() {
         this.rundown = setInterval(() => {
-            this.#changeFn && this.#changeFn(this);
             this.time--;
-            if (this.time < 0) {
+            this.#changeFn && this.#changeFn(this);
+            if (this.time <= 0) {
                 this.#finishFn && this.#finishFn();
                 clearInterval(this.rundown);
             }
