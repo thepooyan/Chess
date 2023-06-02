@@ -9,7 +9,7 @@ const PlayerInfo = ({name, rating, picAddress, reverse}) => {
     <section className="playerInfo">
         <img src={picSrc} />
         <div>{name}<span>({rating})</span></div>
-        <div className={`clock ${reverse?'ops':''}`}>5:00</div>
+        <div className={`clock ${reverse?'ops deactive':''}`}>5:00</div>
     </section>
   )
 }
