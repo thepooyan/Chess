@@ -1,12 +1,22 @@
 .playerInfo {
     color: white;
     display: flex;
-    gap: 0.4em;
+    gap: 0.7em;
     font-size: 0.8em;
     padding: 0.9em 0;
 
     img {
         width: 40px;
         border-radius: .3em;
+    }
+
+    div {
+        padding: .1em 0;
+        span {
+            font-weight: bold;
+            padding-left: .2em;
+            font-family: patrickHand;
+            font-size: 1.1em;
+        }
     }
 }

@@ -8,7 +8,7 @@ const PlayerInfo = ({name, rating, picAddress}) => {
   return (
     <section className='playerInfo'>
         <img src={picSrc} />
-        {`${name} (${rating})`}
+        <div>{name}<span>({rating})</span></div>
     </section>
   )
 }
