@@ -12,6 +12,8 @@
         width: var(--BoardSize);
         height: var(--BoardSize);
         position: relative;
+        border-radius: .2em;
+        overflow: hidden;
 
         .pieces,
         .background {
