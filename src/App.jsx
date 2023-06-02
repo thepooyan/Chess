@@ -4,7 +4,7 @@ import './App.scss';
 function App() {
 
     return (
-        <Board isWhite={false} timer={false}/>
+        <Board isWhite={true} timer={false}/>
     )
 }
 
