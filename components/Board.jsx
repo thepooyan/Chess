@@ -19,38 +19,35 @@ function Board({ isWhite, timer, player1, player2 }) {
     }
   }
 
-  const whiteClockRef = useRef(null);
-  const blackClockRef = useRef(null);
-
   Board.clock = {
     white: new Timer(timer * 60),
     black: new Timer(timer * 60),
+    whiteRef: useRef(null),
+    blackRef: useRef(null),
     change() {
       Board.clock.white.toggle();
       Board.clock.black.toggle();
-      whiteClockRef.current.classList.toggle('deactive');
-      blackClockRef.current.classList.toggle('deactive');
+      Board.clock.whiteRef.current.classList.toggle('deactive');
+      Board.clock.blackRef.current.classList.toggle('deactive');
     },
     start() {
       Board.clock.black.start();
-      blackClockRef.current.classList.remove('deactive');
+      Board.clock.blackRef.current.classList.remove('deactive');
       console.log('clock started!')
     },
     kill() {
       Board.clock.white.reset();
       Board.clock.black.reset();
-      whiteClockRef.current.classList.add('deactive');
-      blackClockRef.current.classList.add('deactive');
+      Board.clock.whiteRef.current.classList.add('deactive');
+      Board.clock.blackRef.current.classList.add('deactive');
     }
   }
 
   Board.clock.white.onchange = t => {
-    console.log('white time', t.getString)
-    whiteClockRef.current.innerText = t.getString;
+    Board.clock.whiteRef.current.innerText = t.getString;
   }
   Board.clock.black.onchange = t => {
-    console.log('black time', t.getString)
-    blackClockRef.current.innerText = t.getString;
+    Board.clock.blackRef.current.innerText = t.getString;
   }
   Board.isWhite = isWhite;
   Board.isFirstMove = true;
@@ -81,7 +78,6 @@ function Board({ isWhite, timer, player1, player2 }) {
   useEffect(() => {
     setUpBoard(Board);
     setBoardClicks(Board);
-    console.log(whiteClockRef)
   })
 
   window.Board = Board;
@@ -92,7 +88,7 @@ function Board({ isWhite, timer, player1, player2 }) {
 
   return (
     <div id="BoardWrapper">
-      <PlayerInfo name={player2.name} rating={player2.rating} reverse={Board.isWhite} clockRef={Board.isWhite ? blackClockRef : whiteClockRef} />
+      <PlayerInfo name={player2.name} rating={player2.rating} reverse={Board.isWhite} clockRef={Board.isWhite ? Board.clock.blackRef : Board.clock.whiteRef} />
       <div id="Board">
         <div className="pieces">
           {cols.map(item => {
@@ -107,7 +103,7 @@ function Board({ isWhite, timer, player1, player2 }) {
           })}
         </div>
       </div>
-      <PlayerInfo name={player1.name} rating={player1.rating} reverse={!Board.isWhite} clockRef={!Board.isWhite ? blackClockRef : whiteClockRef} />
+      <PlayerInfo name={player1.name} rating={player1.rating} reverse={!Board.isWhite} clockRef={!Board.isWhite ? Board.clock.blackRef : Board.clock.whiteRef} />
     </div>
   )
 }
