@@ -8,7 +8,7 @@ function App() {
 
     return (
         <>
-            <Board isWhite={true} timer={false} player1={player1} player2={player2} />
+            <Board isWhite={true} timer={10} player1={player1} player2={player2} />
         </>
     )
 }

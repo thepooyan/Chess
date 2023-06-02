@@ -19,6 +19,7 @@
 - should img address be static to each piece class?
 - how to make kill and authIntersect methods private?
 - after moving programmiticly the click breaks
+- does time work with under second amounts?
 
 -----TO PRESENT
 - clock

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import setBoardClicks from '../modules/setBoardClicks';
 import setUpBoard from '../modules/setUpBoard';
 import Timer from '../modules/Timer';
@@ -18,39 +18,55 @@ function Board({ isWhite, timer, player1, player2 }) {
       this.isWhite = !this.isWhite
     }
   }
+
+  const whiteClockRef = useRef(null);
+  const blackClockRef = useRef(null);
+
   Board.clock = {
     white: new Timer(timer * 60),
     black: new Timer(timer * 60),
     change() {
       Board.clock.white.toggle();
       Board.clock.black.toggle();
+      whiteClockRef.current.classList.toggle('deactive');
+      blackClockRef.current.classList.toggle('deactive');
     },
     start() {
-      Board.clock.white.start();
+      Board.clock.black.start();
+      blackClockRef.current.classList.remove('deactive');
+      console.log('clock started!')
     },
     kill() {
       Board.clock.white.reset();
       Board.clock.black.reset();
+      whiteClockRef.current.classList.add('deactive');
+      blackClockRef.current.classList.add('deactive');
     }
   }
+
   Board.clock.white.onchange = t => {
     console.log('white time', t.getString)
+    whiteClockRef.current.innerText = t.getString;
   }
   Board.clock.black.onchange = t => {
     console.log('black time', t.getString)
+    blackClockRef.current.innerText = t.getString;
   }
   Board.isWhite = isWhite;
   Board.isFirstMove = true;
 
   Board.aftermove = () => {
     Board.turn.change();
-    timer && Board.clock.change();
 
-    if (Board.isFirstMove && timer) {
-      Board.clock.white.pause();
-      Board.isFirstMove = false;
-      console.log('clock started!')
+    if (timer) {
+      if (Board.isFirstMove) {
+        Board.clock.start();
+      } else {
+        Board.clock.change();
+      }
     }
+
+    Board.isFirstMove = false;
   }
 
   Board.clock.white.onfinish = _ => {
@@ -64,7 +80,8 @@ function Board({ isWhite, timer, player1, player2 }) {
 
   useEffect(() => {
     setUpBoard(Board);
-    setBoardClicks(Board)
+    setBoardClicks(Board);
+    console.log(whiteClockRef)
   })
 
   window.Board = Board;
@@ -75,7 +92,7 @@ function Board({ isWhite, timer, player1, player2 }) {
 
   return (
     <div id="BoardWrapper">
-      <PlayerInfo name={player2.name} rating={player2.rating} reverse={Board.isWhite}/>
+      <PlayerInfo name={player2.name} rating={player2.rating} reverse={Board.isWhite} clockRef={Board.isWhite ? blackClockRef : whiteClockRef} />
       <div id="Board">
         <div className="pieces">
           {cols.map(item => {
@@ -90,7 +107,7 @@ function Board({ isWhite, timer, player1, player2 }) {
           })}
         </div>
       </div>
-      <PlayerInfo name={player1.name} rating={player1.rating} reverse={!Board.isWhite}/>
+      <PlayerInfo name={player1.name} rating={player1.rating} reverse={!Board.isWhite} clockRef={!Board.isWhite ? blackClockRef : whiteClockRef} />
     </div>
   )
 }
