@@ -8,3 +8,6 @@
 - add clock
 - add drag n drop
 - win/lose page
+
+bugs:
+- pawn transform to queen does not work
