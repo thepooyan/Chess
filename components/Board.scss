@@ -34,7 +34,7 @@
                     transition: .15s;
 
                     &.occupied {
-                        cursor: pointer;
+                        cursor: grab;
                     }
                 }
             }

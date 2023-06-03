@@ -36,11 +36,13 @@ export default function setBoardClicks(Board) {
             }
             position.square.onmousedown = e => {
                 window.addEventListener('mousemove', dragHandle);
+                position.square.style.cursor = 'grabbing';
                 position.square.style.transition = '0s';
                 x = 0; y = 0;
 
                 window.onmouseup = () => {
                     window.removeEventListener('mousemove', dragHandle);
+                position.square.style.cursor = null;
                     position.square.style.transform = null;
                     position.square.style.transition = null;
                 }
