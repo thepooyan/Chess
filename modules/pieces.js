@@ -84,7 +84,7 @@ class Piece {
     }
     moveAuthorize(pos) {
         try {
-            //start checkings...
+            //am i moving?
             if (pos.name === this.position.name)
                 throw new Error(`can't stay still :/`)
 
@@ -120,16 +120,11 @@ class Piece {
             }
             //checking diagnals
             if (here.x - here.y === dest.x - dest.y || here.x - dest.x === dest.y - here.y) {
-                let xCount = Math.abs(here.x - dest.x);
-                for (let i = 1; i < xCount; i++) {
-                    let x = Math.min(here.x, dest.x) + i;
-                    let y = Math.min(here.y, dest.y) + i;
-                    let square = Piece.restructPosition(x, y);
-                    if (this.Board.positions[square].occupent)
-                        throw new Error('another piece in the way of diagnal')
-                }
+                
+                //throw new Error('another piece in the way of diagnal')
             }
-            //did this move result in a check for my king?
+
+            //did this move result in a check for my own king?
             //...
 
         } catch (err) {
