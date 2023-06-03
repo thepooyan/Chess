@@ -8,6 +8,7 @@
 - add drag n drop (1)
 - win/lose page (4)
 - check calculate on either kings (5)
+- captured pieces (6)
 
 bugs:
 - pawn transform to queen does not work (3)

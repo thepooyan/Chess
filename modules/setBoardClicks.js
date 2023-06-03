@@ -24,8 +24,30 @@ export default function setBoardClicks(Board) {
                 })
             }
 
+            let x=0, y=0;
+            function dragHandle(e) {
+                e.preventDefault();
+                
+                x += e.movementX;
+                y += e.movementY;
+                
+                position.square.style.transform = `translate(${x}px , ${y}px)`;
+            }
+            position.square.onmousedown = e => {
+                window.addEventListener('mousemove', dragHandle);
+                position.square.style.transition = '0s';
+                x=0; y=0;
+                
+                window.onmouseup = () => {
+                    window.removeEventListener('mousemove', dragHandle);
+                    position.square.style.transform = null;
+                    position.square.style.transition = null;
+                }
+            }
+
         } else {
             position.square.onclick = null;
+            position.square.onmousedown = null;
         }
 
     })
