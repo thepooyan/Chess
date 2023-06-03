@@ -1,15 +1,19 @@
 export default function setBoardClicks(Board) {
 
+    function selectSquare(pos) {
+        Object.values(Board.positions).forEach(pos => {
+            pos.background.classList.remove('selected')
+        })
+        pos.background.classList.add('selected');
+    }
+
     Object.values(Board.positions).forEach(position => {
 
         if (position.occupent) {
 
             position.square.onclick = _ => {
                 let piece = position.occupent;
-                Object.values(Board.positions).forEach(pos => {
-                    pos.background.classList.remove('selected')
-                })
-                position.background.classList.add('selected');
+                selectSquare(position);
 
                 Object.values(Board.positions).forEach(position2 => {
                     if (position2.occupent?.isWhite !== position.occupent.isWhite)
@@ -36,6 +40,7 @@ export default function setBoardClicks(Board) {
             }
             position.square.onmousedown = e => {
                 window.addEventListener('mousemove', dragHandle);
+                selectSquare(position);
                 position.square.style.cursor = 'grabbing';
                 position.square.style.transition = '0s';
                 x = 0; y = 0;
