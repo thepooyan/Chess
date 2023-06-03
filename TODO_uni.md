@@ -9,6 +9,7 @@
 - win/lose page (4)
 - check calculate on either kings (5)
 - captured pieces (6)
+- alertBox
 
 bugs:
 - pawn transform to queen does not work (3)
