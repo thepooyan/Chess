@@ -89,8 +89,8 @@ class Piece {
                 throw new Error(`can't stay still :/`)
 
             //is it my turn?
-            // if (this.Board.turn.isWhite !== this.isWhite)
-                // throw new Error(`it's not your move`)
+                if (this.Board.turn.isWhite !== this.isWhite)
+                throw new Error(`it's not your move`)
 
             //does the move shape match the move pattern of the piece?
             let moveShape = Piece.analyseMove(this.position, pos);
@@ -119,30 +119,30 @@ class Piece {
                     throw new Error('another horizantal piece in the way')
             }
 
-            //checking raising diagnals
-            if (here.x - here.y === dest.x - dest.y) {
-                console.log('checking raising diagnals');
+            //checking diagnals
+            if (here.x - here.y === dest.x - dest.y || here.x - dest.x === dest.y - here.y) {
+                let isRising = here.x - here.y === dest.x - dest.y;
                 let count = Math.abs(here.x - dest.x) - 1;
                 let minX = Math.min(here.x, dest.x);
                 let minY = Math.min(here.y, dest.y);
+                let maxY = Math.max(here.y, dest.y);
 
                 if (count > 0) {
-                    for (let i=0; i < count; i++) {
+                    for (let i = 0; i < count; i++) {
                         let x = minX + i + 1;
-                        let y = minY + i + 1;
-                        let squareName = Piece.restructPosition(x, y);
+                        let y;
+                        if (isRising)
+                            y = minY + i + 1;
+                        else
+                            y = maxY - i - 1;
 
+                        let squareName = Piece.restructPosition(x, y);
+                        
                         if (this.Board.positions[squareName].occupent)
-                            throw new Error('another piece in the way of raising diagnal')
+                            throw new Error(`another piece in the way of diagnal (${squareName})`)
 
                     }
                 }
-            }
-
-            //checking falling diagnals
-            if (here.x - dest.x === dest.y - here.y) {
-                console.log('checking falling diagnals');
-
             }
 
             //did this move result in a check for my own king?
@@ -177,13 +177,13 @@ class Piece {
         let x = dest.x - here.x;
         let y = here.y - dest.y;
         if (!this.Board.isWhite) {
-            x = -x;y = -y;
+            x = -x; y = -y;
         }
         x = x * 100;
         y = y * 100;
         let movingSquare = this.position.square;
         movingSquare.style.transform = `translate(${x}px, ${y}px)`;
-        movingSquare.addEventListener('transitionend', ()=>{
+        movingSquare.addEventListener('transitionend', () => {
             this.transport(pos);
             movingSquare.style.transform = '';
         })
@@ -208,7 +208,7 @@ class Piece {
 export class Pawn extends Piece {
     constructor(position, Board, { isWhite } = { isWhite: true }) {
         let forwardSymbole = isWhite ? 'u' : 'd';
-        super(position, isWhite,forwardSymbole, Board);
+        super(position, isWhite, forwardSymbole, Board);
         this.forwardSymbole = forwardSymbole;
     }
     moveAuthorize(pos) {
@@ -280,17 +280,17 @@ export class King extends Piece {
             if (moveShape === 'rr') {
                 let rook = this.Board.pieces[whiteOrBlack].rook_R;
                 let rookP = Piece.destructPosition(rook.position);
-                if (Piece.isCourseClear(kingP.y, kingP.x, rookP.x , this.Board, true) && rook.firstMove) {
+                if (Piece.isCourseClear(kingP.y, kingP.x, rookP.x, this.Board, true) && rook.firstMove) {
                     this.movePattern += '|rr';
-                    this.rookTransport = {place: this.Board.positions[`F${kingP.y}`], rook: rook};
+                    this.rookTransport = { place: this.Board.positions[`F${kingP.y}`], rook: rook };
                 }
             }
             if (moveShape === 'll') {
                 let rook = this.Board.pieces[whiteOrBlack].rook_L;
                 let rookP = Piece.destructPosition(rook.position);
-                if (Piece.isCourseClear(kingP.y, kingP.x, rookP.x , this.Board, true) && rook.firstMove) {
+                if (Piece.isCourseClear(kingP.y, kingP.x, rookP.x, this.Board, true) && rook.firstMove) {
                     this.movePattern += '|ll';
-                    this.rookTransport = {place: this.Board.positions[`D${kingP.y}`], rook: rook};
+                    this.rookTransport = { place: this.Board.positions[`D${kingP.y}`], rook: rook };
                 }
             }
 
