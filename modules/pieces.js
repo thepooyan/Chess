@@ -89,8 +89,8 @@ class Piece {
                 throw new Error(`can't stay still :/`)
 
             //is it my turn?
-            if (this.Board.turn.isWhite !== this.isWhite)
-                throw new Error(`it's not your move`)
+            // if (this.Board.turn.isWhite !== this.isWhite)
+                // throw new Error(`it's not your move`)
 
             //does the move shape match the move pattern of the piece?
             let moveShape = Piece.analyseMove(this.position, pos);
@@ -118,10 +118,31 @@ class Piece {
                 if (!Piece.isCourseClear(here.y, dest.x, here.x, this.Board, true))
                     throw new Error('another horizantal piece in the way')
             }
-            //checking diagnals
-            if (here.x - here.y === dest.x - dest.y || here.x - dest.x === dest.y - here.y) {
-                
-                //throw new Error('another piece in the way of diagnal')
+
+            //checking raising diagnals
+            if (here.x - here.y === dest.x - dest.y) {
+                console.log('checking raising diagnals');
+                let count = Math.abs(here.x - dest.x) - 1;
+                let minX = Math.min(here.x, dest.x);
+                let minY = Math.min(here.y, dest.y);
+
+                if (count > 0) {
+                    for (let i=0; i < count; i++) {
+                        let x = minX + i + 1;
+                        let y = minY + i + 1;
+                        let squareName = Piece.restructPosition(x, y);
+
+                        if (this.Board.positions[squareName].occupent)
+                            throw new Error('another piece in the way of raising diagnal')
+
+                    }
+                }
+            }
+
+            //checking falling diagnals
+            if (here.x - dest.x === dest.y - here.y) {
+                console.log('checking falling diagnals');
+
             }
 
             //did this move result in a check for my own king?
