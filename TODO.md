@@ -20,6 +20,7 @@
 - how to make kill and authIntersect methods private?
 - after moving programmiticly the click breaks
 - does time work with under second amounts?
+- the ability to go back
 
 -----TO PRESENT
 - clock
