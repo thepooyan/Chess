@@ -29,7 +29,7 @@ export default function setBoardClicks(Board) {
                 })
             }
 
-            let x = 0, y = 0;
+            let x = 0, y = 0, prevID;
             function dragHandle(e) {
                 e.preventDefault();
 
@@ -37,19 +37,30 @@ export default function setBoardClicks(Board) {
                 y += e.movementY;
 
                 position.square.style.transform = `translate(${x}px , ${y}px)`;
+
+                //_______drop off square
+                let dropID = e.target.id;
+
+                if (dropID && dropID !== prevID) {
+                    Board.positions[prevID]?.background.classList.remove('heightlight');
+                    Board.positions[dropID].background.classList.add('heightlight');
+                    prevID = dropID;
+                }
             }
             position.square.onmousedown = e => {
                 window.addEventListener('mousemove', dragHandle);
                 selectSquare(position);
                 position.square.style.cursor = 'grabbing';
                 position.square.style.transition = '0s';
+                position.square.style.pointerEvents = 'none';
                 x = 0; y = 0;
 
                 window.onmouseup = () => {
                     window.removeEventListener('mousemove', dragHandle);
-                position.square.style.cursor = null;
+                    position.square.style.cursor = null;
                     position.square.style.transform = null;
                     position.square.style.transition = null;
+                    position.square.style.pointerEvents = null;
                 }
             }
 
