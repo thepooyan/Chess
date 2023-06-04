@@ -66,7 +66,7 @@ export default function setBoardClicks(Board) {
                     position.square.style.pointerEvents = null;
                     Board.positions[prevID].background.classList.remove('heightlight');
 
-                    console.log('drop square', dropSquare);
+                    position.occupent.move(dropSquare);
                 }
             }
 
