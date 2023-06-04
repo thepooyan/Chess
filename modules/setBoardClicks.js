@@ -29,7 +29,7 @@ export default function setBoardClicks(Board) {
                 })
             }
 
-            let x = 0, y = 0, prevID;
+            let x = 0, y = 0, prevID, dropSquare;
             function dragHandle(e) {
                 e.preventDefault();
 
@@ -42,9 +42,11 @@ export default function setBoardClicks(Board) {
                 let dropID = e.target.id;
 
                 if (dropID && dropID !== prevID) {
+                    dropSquare = Board.positions[dropID];
                     Board.positions[prevID]?.background.classList.remove('heightlight');
-                    Board.positions[dropID].background.classList.add('heightlight');
                     prevID = dropID;
+                    if (dropSquare.occupent) return
+                    dropSquare.background.classList.add('heightlight');
                 }
             }
             position.square.onmousedown = e => {
@@ -53,6 +55,7 @@ export default function setBoardClicks(Board) {
                 position.square.style.cursor = 'grabbing';
                 position.square.style.transition = '0s';
                 position.square.style.pointerEvents = 'none';
+                prevID = null;
                 x = 0; y = 0;
 
                 window.onmouseup = () => {
@@ -61,6 +64,9 @@ export default function setBoardClicks(Board) {
                     position.square.style.transform = null;
                     position.square.style.transition = null;
                     position.square.style.pointerEvents = null;
+                    Board.positions[prevID].background.classList.remove('heightlight');
+
+                    console.log('drop square', dropSquare);
                 }
             }
 
