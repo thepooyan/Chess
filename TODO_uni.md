@@ -13,3 +13,4 @@
 
 bugs:
 - pawn transform to queen does not work (3)
+- grab effect breaks on drag
