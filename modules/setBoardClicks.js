@@ -52,7 +52,7 @@ export default function setBoardClicks(Board) {
             position.square.onmousedown = e => {
                 window.addEventListener('mousemove', dragHandle);
                 selectSquare(position);
-                position.square.style.cursor = 'grabbing';
+                Board.mainRef.current.classList.add('grabbing');
                 position.square.style.transition = '0s';
                 position.square.style.pointerEvents = 'none';
                 prevID = null;
@@ -60,7 +60,7 @@ export default function setBoardClicks(Board) {
 
                 window.onmouseup = () => {
                     window.removeEventListener('mousemove', dragHandle);
-                    position.square.style.cursor = null;
+                    Board.mainRef.current.classList.remove('grabbing');
                     position.square.style.transform = null;
                     position.square.style.transition = null;
                     position.square.style.pointerEvents = null;

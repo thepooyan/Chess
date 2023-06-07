@@ -11,6 +11,7 @@ function Board({ isWhite, timer, player1, player2 }) {
 
   Board.positions = {};
   Board.pieces = { white: {}, black: {} }
+  Board.mainRef = useRef(null);
 
   Board.turn = {
     isWhite: true,
@@ -89,7 +90,7 @@ function Board({ isWhite, timer, player1, player2 }) {
   return (
     <div id="BoardWrapper">
       <PlayerInfo name={player2.name} rating={player2.rating} reverse={Board.isWhite} clockRef={Board.isWhite ? Board.clock.blackRef : Board.clock.whiteRef} initTime={Board.clock.white.getString} />
-      <div id="Board">
+      <div id="Board" ref={Board.mainRef}>
         <div className="pieces">
           {cols.map(item => {
             return (
