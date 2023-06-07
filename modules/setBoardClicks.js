@@ -7,7 +7,7 @@ export default function setBoardClicks(Board) {
         pos.background.classList.add('selected');
     }
 
-    function destinationCheck(position,dest) {
+    function destinationSelected(position, dest) {
         let piece = position.occupent;
         let moved = piece.move(dest);
         if (moved)
@@ -17,22 +17,18 @@ export default function setBoardClicks(Board) {
 
         setBoardClicks(Board);
     }
+    function pieceClicked(position) {
+        Object.values(Board.positions).forEach(position2 => {
+            if (position2.occupent?.isWhite !== position.occupent.isWhite)
+                position2.square.onclick = () => {
+                    destinationSelected(position, position2);
+                }
+        })
+    }
 
     Object.values(Board.positions).forEach(position => {
 
         if (position.occupent) {
-
-            position.square.onclick = _ => {
-                selectSquare(position);
-
-                Object.values(Board.positions).forEach(position2 => {
-                    if (position2.occupent?.isWhite !== position.occupent.isWhite)
-                        position2.square.onclick = () => {
-                            destinationCheck(position,position2);
-                        }
-                })
-            }
-
             let x = 0, y = 0, prevID, dropSquare;
             function dragHandle(e) {
                 e.preventDefault();
@@ -68,9 +64,13 @@ export default function setBoardClicks(Board) {
                     position.square.style.transform = null;
                     position.square.style.transition = null;
                     position.square.style.pointerEvents = null;
+                    if (!dropSquare) {
+                        pieceClicked(position);
+                        return
+                    }
                     Board.positions[prevID].background.classList.remove('heightlight');
 
-                    destinationCheck(position, dropSquare);
+                    destinationSelected(position, dropSquare);
                 }
             }
 
