@@ -45,7 +45,7 @@ export default function setBoardClicks(Board) {
                     dropSquare = Board.positions[dropID];
                     Board.positions[prevID]?.background.classList.remove('heightlight');
                     prevID = dropID;
-                    if (dropSquare.occupent) return
+                    if (dropSquare.occupent?.isWhite === position.occupent.isWhite) return
                     dropSquare.background.classList.add('heightlight');
                 }
             }
@@ -67,6 +67,7 @@ export default function setBoardClicks(Board) {
                     Board.positions[prevID].background.classList.remove('heightlight');
 
                     position.occupent.move(dropSquare);
+                    setBoardClicks(Board);
                 }
             }
 
