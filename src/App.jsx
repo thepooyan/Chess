@@ -1,4 +1,5 @@
 import Board from "../components/Board";
+import Modal from "../components/Modal";
 import './App.scss';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     return (
         <>
             <Board isWhite={true} timer={3} player1={player1} player2={player2} />
+            <Modal></Modal>
         </>
     )
 }
