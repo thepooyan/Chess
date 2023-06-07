@@ -7,24 +7,28 @@ export default function setBoardClicks(Board) {
         pos.background.classList.add('selected');
     }
 
+    function destinationCheck(position,dest) {
+        let piece = position.occupent;
+        let moved = piece.move(dest);
+        if (moved)
+            dest.background.classList.add('selected');
+        else
+            position.background.classList.remove('selected');
+
+        setBoardClicks(Board);
+    }
+
     Object.values(Board.positions).forEach(position => {
 
         if (position.occupent) {
 
             position.square.onclick = _ => {
-                let piece = position.occupent;
                 selectSquare(position);
 
                 Object.values(Board.positions).forEach(position2 => {
                     if (position2.occupent?.isWhite !== position.occupent.isWhite)
                         position2.square.onclick = () => {
-                            let moved = piece.move(position2);
-                            if (moved)
-                                position2.background.classList.add('selected');
-                            else
-                                position.background.classList.remove('selected');
-
-                            setBoardClicks(Board);
+                            destinationCheck(position,position2);
                         }
                 })
             }
