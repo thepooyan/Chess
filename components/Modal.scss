@@ -13,6 +13,7 @@
 
     .content {
         background-color: #FFFFFF;
+        color: #4b4847;
         width: 22em;
         box-sizing: border-box;
         padding: 1.5em;
@@ -36,8 +37,16 @@
                 outline: none;
             }
 
-            &.whiteIcon,
-            &.blackIcon {
+
+
+        }
+
+        .white_black {
+            display: flex;
+            justify-content: center;
+            gap: 2em;
+
+            .whiteIcon, .blackIcon {
 
                 &::before {
                     content: "\e904";
