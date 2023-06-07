@@ -12,7 +12,7 @@
     align-items: center;
 
     .content {
-        background-color: white;
+        background-color: #FFFFFF;
         width: 22em;
         box-sizing: border-box;
         padding: 1.5em;
@@ -35,6 +35,28 @@
             input {
                 outline: none;
             }
+
+            &.whiteIcon,
+            &.blackIcon {
+
+                &::before {
+                    content: "\e904";
+                    font-family: chess;
+                    border: 1px solid black;
+                    font-size: 2.1em;
+                    width: 1.4em;
+                    height: 1.4em;
+                    display: flex;
+                    align-items: center;
+                    border-radius: 0.2em;
+                    justify-content: center;
+                }
+
+                &.blackIcon::before {
+                    color: white;
+                    background-color: black;
+                }
+            }
         }
 
         button {
@@ -50,6 +72,7 @@
             margin: auto;
             margin-bottom: 0;
             margin-top: 2em;
+
         }
     }
 }

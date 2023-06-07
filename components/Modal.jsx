@@ -32,15 +32,16 @@ const Content = () => {
             </label>
 
             <h3>i play as:</h3>
-            <label htmlFor="">
-                white
-                <input type="checkbox" />
+            <div className="white_black">
+
+            <label className='whiteIcon'>
+                <input type="checkbox" hidden/>
             </label>
 
-            <label htmlFor="">
-                black
-                <input type="checkbox" />
+            <label className='blackIcon'>
+                <input type="checkbox" hidden/>
             </label>
+            </div>
 
             <h3>time</h3>
 
