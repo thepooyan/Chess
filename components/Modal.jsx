@@ -18,7 +18,7 @@ const Content = () => {
             </label>
             <label htmlFor="">
                 Rating:
-                <input type="number" />
+                <input type="text" />
             </label>
 
             <h3>Opponent</h3>
@@ -28,7 +28,7 @@ const Content = () => {
             </label>
             <label htmlFor="">
                 Rating:
-                <input type="number" />
+                <input type="text" />
             </label>
 
             <h3>i play as:</h3>
