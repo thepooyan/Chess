@@ -46,7 +46,10 @@
             justify-content: center;
             gap: 2em;
 
-            .whiteIcon, .blackIcon {
+            .whiteIcon,
+            .blackIcon {
+                cursor: pointer;
+                transition: .2s;
 
                 &::before {
                     content: "\e904";
@@ -64,6 +67,17 @@
                 &.blackIcon::before {
                     color: white;
                     background-color: black;
+                }
+
+                &:hover {
+                    filter: drop-shadow(1px 1px 3px #0009);
+                }
+
+                &.active {
+                    &::before {
+                        border-color: #56965d;
+                        border-width: .1em;
+                    }
                 }
             }
         }
