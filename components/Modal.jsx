@@ -1,6 +1,6 @@
 import reactDom from 'react-dom';
 import './Modal.scss'
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 //contents of the modal
 const Content = ({ submitHandler }) => {
@@ -9,8 +9,8 @@ const Content = ({ submitHandler }) => {
     const rate1 = useRef(null);
     const name2 = useRef(null);
     const rate2 = useRef(null);
-    const isWhite = useRef(null);
-    const time = useRef(null);
+    const [isWhite, setIsWhite] = useState(true);
+    const [time, setTime] = useState(3);
 
     const submitPrep = e => {
         e.preventDefault();
@@ -18,8 +18,8 @@ const Content = ({ submitHandler }) => {
         const data = {
             player1: { name: name1.current.value, rating: rate1.current.value },
             player2: { name: name2.current.value, rating: rate2.current.value },
-            isWhite: true,
-            time: 5
+            isWhite: isWhite,
+            time: time
         };
 
         submitHandler(data);
@@ -52,11 +52,11 @@ const Content = ({ submitHandler }) => {
                 <div className="white_black">
 
                     <label className='whiteIcon'>
-                        <input type="checkbox" hidden ref={isWhite} />
+                        <input type="checkbox" hidden  onChange={()=>{setIsWhite(true)}}/>
                     </label>
 
                     <label className='blackIcon'>
-                        <input type="checkbox" hidden />
+                        <input type="checkbox" hidden  onChange={()=>{setIsWhite(false)}}/>
                     </label>
                 </div>
 
@@ -64,17 +64,17 @@ const Content = ({ submitHandler }) => {
 
                 <label htmlFor="">
                     3 min
-                    <input type="checkbox" />
+                    <input type="checkbox"  onChange={()=>{setTime(3)}}/>
                 </label>
 
                 <label htmlFor="">
                     5 min
-                    <input type="checkbox" />
+                    <input type="checkbox" onChange={()=>{setTime(5)}}/>
                 </label>
 
                 <label htmlFor="">
                     10 min
-                    <input type="checkbox" />
+                    <input type="checkbox" onChange={()=>{setTime(10)}}/>
                 </label>
 
                 <button type='submit'>Play!</button>
