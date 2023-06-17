@@ -15,11 +15,20 @@ export default function setBoardClicks(Board) {
         else
             position.background.classList.remove('selected');
 
-        setBoardClicks(Board);
+        setTimeout(() => {
+            setBoardClicks(Board);
+        }, 0);
+    }
+    function clearEvents(square) {
+        square.onclick = null;
+        square.onmousedown = null;
+        square.onmouseup = null;
+        square.onmousemove = null;
     }
     function pieceClicked(position) {
         Object.values(Board.positions).forEach(position2 => {
             if (position2.occupent?.isWhite !== position.occupent.isWhite)
+                clearEvents(position2.square);
                 position2.square.onclick = () => {
                     destinationSelected(position, position2);
                 }
@@ -75,8 +84,7 @@ export default function setBoardClicks(Board) {
             }
 
         } else {
-            position.square.onclick = null;
-            position.square.onmousedown = null;
+            clearEvents(position.square);
         }
 
     })
