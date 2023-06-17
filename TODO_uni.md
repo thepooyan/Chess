@@ -1,3 +1,7 @@
+- add error modal
+- add error sound
+- add piece move sound
+_______
 - win/lose page (4)
 - check calculate on either kings (5)
 - captured pieces (6)
