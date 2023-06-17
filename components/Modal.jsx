@@ -5,6 +5,7 @@ import { useRef, useState } from 'react';
 //contents of the modal
 const Content = ({ submitHandler }) => {
 
+    const modal = useRef(null);
     const name1 = useRef(null);
     const rate1 = useRef(null);
     const name2 = useRef(null);
@@ -22,11 +23,12 @@ const Content = ({ submitHandler }) => {
             time: time
         };
 
+        modal.current.classList.remove('active');
         submitHandler(data);
     }
 
     return (
-        <div id="modal">
+        <div id="modal" className='active' ref={modal}>
             <form className='content' onSubmit={submitPrep}>
                 <h3>Me:</h3>
                 <label htmlFor="">

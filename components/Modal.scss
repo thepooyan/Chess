@@ -10,8 +10,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: .2s;
 
     .content {
+        transition: .2s;
+        transform: scale(.8);
         background-color: #FFFFFF;
         color: #4b4847;
         width: 22em;
@@ -95,6 +100,14 @@
             margin-bottom: 0;
             margin-top: 2em;
 
+        }
+    }
+
+    &.active {
+        opacity: 100;
+        visibility: visible;
+        .content {
+            transform: scale(1);
         }
     }
 }
