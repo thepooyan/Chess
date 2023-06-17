@@ -51,30 +51,30 @@ const Content = ({ submitHandler }) => {
                 <h3>i play as:</h3>
                 <div className="white_black">
 
-                    <label className='whiteIcon'>
+                    <label className={`whiteIcon ${isWhite?'active':''}`}>
                         <input type="checkbox" hidden  onChange={()=>{setIsWhite(true)}}/>
                     </label>
 
-                    <label className='blackIcon'>
+                    <label className={`blackIcon ${isWhite?'':'active'}`}>
                         <input type="checkbox" hidden  onChange={()=>{setIsWhite(false)}}/>
                     </label>
                 </div>
 
                 <h3>time</h3>
 
-                <label htmlFor="">
+                <label htmlFor="3min">
                     3 min
-                    <input type="checkbox"  onChange={()=>{setTime(3)}}/>
+                    <input type="checkbox" id='3min' onChange={()=>{setTime(3)}} checked={time===3}/>
                 </label>
 
-                <label htmlFor="">
+                <label htmlFor="5min">
                     5 min
-                    <input type="checkbox" onChange={()=>{setTime(5)}}/>
+                    <input type="checkbox" id='5min' onChange={()=>{setTime(5)}} checked={time===5}/>
                 </label>
 
-                <label htmlFor="">
+                <label htmlFor="10min">
                     10 min
-                    <input type="checkbox" onChange={()=>{setTime(10)}}/>
+                    <input type="checkbox" id='10min' onChange={()=>{setTime(10)}} checked={time===10} />
                 </label>
 
                 <button type='submit'>Play!</button>
