@@ -28,7 +28,7 @@ const Content = ({ submitHandler }) => {
     return (
         <div id="modal">
             <form className='content' onSubmit={submitPrep}>
-                <h3>Me</h3>
+                <h3>Me:</h3>
                 <label htmlFor="">
                     Name:
                     <input type="text" ref={name1} />
@@ -38,7 +38,7 @@ const Content = ({ submitHandler }) => {
                     <input type="text" ref={rate1} />
                 </label>
 
-                <h3>Opponent</h3>
+                <h3>Opponent:</h3>
                 <label htmlFor="">
                     Name:
                     <input type="text" ref={name2} />
@@ -60,7 +60,7 @@ const Content = ({ submitHandler }) => {
                     </label>
                 </div>
 
-                <h3>time</h3>
+                <h3>time:</h3>
 
                 <label htmlFor="3min">
                     3 min
