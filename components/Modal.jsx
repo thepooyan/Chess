@@ -9,7 +9,8 @@ const Content = ({ closeModal, children }) => {
     const done = () => {
         modal.current.classList.remove('active');
     }
-    // closeModal(done);
+    closeModal(done);
+    // console.log(closeModal)
 
     return (
         <div id="modal" className='active' ref={modal}>
