@@ -1,34 +1,45 @@
 import reactDom from 'react-dom';
-import './Modal.scss'
+import './Modal.scss';
 import { useRef } from 'react';
+import { useState } from 'react';
+
+let modalHandler;
 
 //contents of the modal
-const Content = ({ closeModal, children }) => {
+const Content = () => {
 
-    const modal = useRef(null);
-    const done = () => {
-        modal.current.classList.remove('active');
+    const modalRef = useRef(null);
+    const contentRef = useRef(null);
+    const [content, setContent] = useState();
+
+    const closeModal = () => {
+        modalRef.current.classList.remove('active');
     }
-    closeModal(done);
-    // console.log(closeModal)
+
+    modalHandler = func => {
+        func(setContent, closeModal);
+        modalRef.current.classList.add('active');
+    }
 
     return (
-        <div id="modal" className='active' ref={modal}>
-            <div className="content">
-                {children}
+        <div id="modal" ref={modalRef}>
+            <div className="content" ref={contentRef}>
+                {content}
             </div>
         </div>
     )
 }
 
-const Modal = (props) => {
+//modal portal
+const Modal = () => {
     return (
         <>
             {
-                reactDom.createPortal(<Content closeModal={props.closeModal}>{props.children}</Content>, document.getElementById('modalCont'))
+                reactDom.createPortal(<Content/>, document.getElementById('modalCont'))
             }
         </>
     )
 }
 
+export { modalHandler }
 export default Modal

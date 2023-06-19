@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Board from "../components/Board";
-import Modal from "../components/Modal";
+import { modalHandler } from "../components/Modal";
 import './App.scss';
 import StartPage from "../components/StartPage";
 
@@ -11,19 +11,23 @@ function App() {
 
     const [boardComponent, setBoardComponent] = useState(<Board isWhite={true} timer={0} player1={player1} player2={player2} />);
 
-    const submitHandler = data => {
-        setBoardComponent(<Board isWhite={data.isWhite} timer={data.time} player1={data.player1} player2={data.player2} />)
-        closeModal();
-    }
-    let closeModal;
-    const getCloseModal = e => {
-        closeModal = e;
-    }
+    //call the start modal and continue with input result
+    useEffect(() => {
+        console.log('effect')
+        modalHandler((callModal, closeModal) => {
+
+            const submitHandler = data => {
+                setBoardComponent(<Board isWhite={data.isWhite} timer={data.time} player1={data.player1} player2={data.player2} />)
+                closeModal();
+            }
+
+            callModal(<StartPage submitHandler={submitHandler} />);
+        });
+    }, [])
 
     return (
         <>
             {boardComponent}
-            {<Modal closeModal={getCloseModal}> <StartPage submitHandler={submitHandler} /> </Modal>}
         </>
     )
 }
