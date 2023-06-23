@@ -1,6 +1,6 @@
 export default function setBoardClicks(Board) {
 
-    function selectSquare(pos) {
+    function heighlightSquare(pos) {
         Object.values(Board.positions).forEach(pos => {
             pos.background.classList.remove('selected')
         })
@@ -62,29 +62,29 @@ export default function setBoardClicks(Board) {
                 Board.mainRef.current.classList.add('grabbing');
                 piece.style.transition = '0s';
                 piece.style.pointerEvents = 'none';
+                prevID = null;
+                x = 0; y = 0;
+                window.addEventListener('mousemove', dragHandle);
             }
             function releasePiece(piece) {
                 Board.mainRef.current.classList.remove('grabbing');
-                position.square.style.transform = null;
-                position.square.style.transition = null;
-                position.square.style.pointerEvents = null;
+                piece.style.transform = null;
+                piece.style.transition = null;
+                piece.style.pointerEvents = null;
+                window.removeEventListener('mousemove', dragHandle);
             }
             position.square.onmousedown = e => {
-                window.addEventListener('mousemove', dragHandle);
-                selectSquare(position);
+                heighlightSquare(position);
                 grabbingPiece(position.square);
-                prevID = null;
-                x = 0; y = 0;
 
                 window.onmouseup = () => {
-                    window.removeEventListener('mousemove', dragHandle);
                     releasePiece(position.square);
                     if (!dropSquare) {
                         pieceClicked(position);
                         return
                     }
-                    Board.positions[prevID].background.classList.remove('heightlight');
 
+                    Board.positions[prevID].background.classList.remove('heightlight');
                     destinationSelected(position, dropSquare);
                 }
             }
