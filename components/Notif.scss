@@ -1,0 +1,13 @@
+#notifCont {
+    position: fixed;
+    right: .7em;
+    bottom: .7em;
+
+    >div {
+        background: white;
+        padding: 0.7em;
+        border-radius: 0.8em;
+        font-size: 0.9em;
+        margin-top: .5em;
+    }
+}

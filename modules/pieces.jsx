@@ -1,3 +1,4 @@
+import { pushNotif } from '../components/Notif';
 import config from '../config/chessConfig.json';
 const imgFolder = `/Chess set themes/${config.theme}/`;
 
@@ -149,7 +150,7 @@ class Piece {
             //...
 
         } catch (err) {
-            console.log(`unauthorized move (${this.type} ${this.position.name} => ${pos.name})\n`, err.message);
+            pushNotif(<>unauthorized move (the {this.position.name} {this.type} TO {pos.name})<br/>{err.message}</>);
             return false
         }
         return true
