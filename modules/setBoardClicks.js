@@ -27,10 +27,12 @@ export default function setBoardClicks(Board) {
     }
     function pieceClicked(position) {
         Object.values(Board.positions).forEach(position2 => {
-            if (position2.occupent?.isWhite !== position.occupent.isWhite)
+            if (position2.occupent?.isWhite !== position.occupent.isWhite) {
                 clearEvents(position2.square);
-            position2.square.onclick = () => {
-                destinationSelected(position, position2);
+
+                position2.square.onclick = () => {
+                    destinationSelected(position, position2);
+                }
             }
         })
     }
