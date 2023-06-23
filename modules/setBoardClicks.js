@@ -29,9 +29,9 @@ export default function setBoardClicks(Board) {
         Object.values(Board.positions).forEach(position2 => {
             if (position2.occupent?.isWhite !== position.occupent.isWhite)
                 clearEvents(position2.square);
-                position2.square.onclick = () => {
-                    destinationSelected(position, position2);
-                }
+            position2.square.onclick = () => {
+                destinationSelected(position, position2);
+            }
         })
     }
 
@@ -58,21 +58,27 @@ export default function setBoardClicks(Board) {
                     dropSquare.background.classList.add('heightlight');
                 }
             }
+            function grabbingPiece(piece) {
+                Board.mainRef.current.classList.add('grabbing');
+                piece.style.transition = '0s';
+                piece.style.pointerEvents = 'none';
+            }
+            function releasePiece(piece) {
+                Board.mainRef.current.classList.remove('grabbing');
+                position.square.style.transform = null;
+                position.square.style.transition = null;
+                position.square.style.pointerEvents = null;
+            }
             position.square.onmousedown = e => {
                 window.addEventListener('mousemove', dragHandle);
                 selectSquare(position);
-                Board.mainRef.current.classList.add('grabbing');
-                position.square.style.transition = '0s';
-                position.square.style.pointerEvents = 'none';
+                grabbingPiece(position.square);
                 prevID = null;
                 x = 0; y = 0;
 
                 window.onmouseup = () => {
                     window.removeEventListener('mousemove', dragHandle);
-                    Board.mainRef.current.classList.remove('grabbing');
-                    position.square.style.transform = null;
-                    position.square.style.transition = null;
-                    position.square.style.pointerEvents = null;
+                    releasePiece(position.square);
                     if (!dropSquare) {
                         pieceClicked(position);
                         return
