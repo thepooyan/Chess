@@ -9,5 +9,12 @@
         border-radius: 0.8em;
         font-size: 0.9em;
         margin-top: .5em;
+        opacity: 0;
+        transform: scale(.8);
+
+        &.active {
+            opacity: 100;
+            transform: scale(1);
+        }
     }
 }
