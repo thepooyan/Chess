@@ -13,7 +13,6 @@ function App() {
 
     //call the start modal and continue with input result
     useEffect(() => {
-        console.log('effect')
         modalHandler((callModal, closeModal) => {
 
             const submitHandler = data => {
