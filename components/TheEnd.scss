@@ -4,6 +4,13 @@
     border-radius: .4em;
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    padding-top: 2em;
+
+    span {
+        display: block;
+        text-align: center;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
 
 }

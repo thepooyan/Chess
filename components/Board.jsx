@@ -76,7 +76,9 @@ function Board({ isWhite, timer, player1, player2 }) {
     Board.clock.kill();
   }
   Board.clock.black.onfinish = _ => {
-    alert('black lost on time')
+    modalHandler((show, close) => {
+      show(<TheEnd>black lost on time!</TheEnd>);
+    })
     Board.clock.kill();
   }
 
