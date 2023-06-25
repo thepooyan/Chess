@@ -16,7 +16,7 @@ function App() {
         modalHandler((callModal, closeModal) => {
 
             const submitHandler = data => {
-                setBoardComponent(<Board isWhite={data.isWhite} timer={data.time} player1={data.player1} player2={data.player2} />)
+                setBoardComponent(<Board isWhite={data.isWhite} timer={.1} player1={data.player1} player2={data.player2} />)
                 closeModal();
             }
 

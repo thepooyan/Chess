@@ -6,6 +6,8 @@ import './Board.scss';
 import TheFile from './TheFile';
 import TheFileAlt from './TheFileAlt';
 import PlayerInfo from "../components/PlayerInfo";
+import { modalHandler } from './Modal';
+import TheEnd from './TheEnd';
 
 function Board({ isWhite, timer, player1, player2 }) {
 
@@ -68,7 +70,9 @@ function Board({ isWhite, timer, player1, player2 }) {
   }
 
   Board.clock.white.onfinish = _ => {
-    alert('white lost on time')
+    modalHandler((show, close) => {
+      show(<TheEnd>white lost on time!</TheEnd>);
+    })
     Board.clock.kill();
   }
   Board.clock.black.onfinish = _ => {

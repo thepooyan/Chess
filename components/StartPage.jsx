@@ -1,3 +1,4 @@
+import Button from './Button';
 import './StartPage.scss';
 import { useRef, useState } from 'react';
 
@@ -75,7 +76,7 @@ const StartPage = ({ submitHandler }) => {
                 <input type="checkbox" id='10min' onChange={() => { setTime(10) }} checked={time === 10} />
             </label>
 
-            <button type='submit'>Play!</button>
+            <Button type='submit'>Play!</Button>
         </form>
     )
 }
