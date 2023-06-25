@@ -37,6 +37,7 @@ export default function setBoardClicks(Board) {
         })
     }
 
+    clearEvents(window);
     Object.values(Board.positions).forEach(position => {
 
         if (position.occupent) {
