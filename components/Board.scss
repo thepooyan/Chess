@@ -1,6 +1,10 @@
 #BoardWrapper {
     width: max-content;
     margin: auto;
+    
+    * {
+        user-select: none;
+    }
 
     #Board {
         --color2: #EEEED2;
