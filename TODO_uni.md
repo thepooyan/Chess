@@ -5,4 +5,4 @@ _______
 - captured pieces (6)
 
 bugs:
-- pawn transform to queen does not work (3)
+- pawn transform to queen works, but after transform is done, square occupent is not updated

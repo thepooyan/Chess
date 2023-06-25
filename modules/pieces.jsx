@@ -230,10 +230,13 @@ export class Pawn extends Piece {
         //reset the move pattern after the move is done
         this.movePattern = patternBackup;
 
+        //this means arrvied at last square
         if (result && /.8/.test(pos.name)) {
             setTimeout(() => {
-                new Queen(this.position, this.Board, { isWhite: this.isWhite });
+                //this code will run after the move is done for the timeout
+                const DATA = {position: this.position, Board: this.Board, isWhite: this.isWhite};
                 this.kill();
+                this.Board.positions[DATA.position.name].occupent = new Queen(DATA.position, DATA.Board, { isWhite: DATA.isWhite });
             }, 0);
         }
 
