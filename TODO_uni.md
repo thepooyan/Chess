@@ -6,3 +6,4 @@ _______
 
 bugs:
 - pawn transform to queen works, but after transform is done, square occupent is not updated
+also, black pawns don't transform
