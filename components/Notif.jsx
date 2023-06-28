@@ -2,39 +2,35 @@ import React, { useEffect, useRef, useState } from 'react'
 import './Notif.scss';
 
 let pushNotif;
+let prevTimeout;
 
 const Notif = () => {
 
     const [content, setContent] = useState();
-
-    pushNotif = (msg) => {
-        setContent(<><DyingDiv>{msg}</DyingDiv>{content}</>);
-    }
-    window.pushNotif = pushNotif;
-
-    return (
-        <div id='notifCont'>
-            {content}
-        </div>
-    )
-}
-
-const DyingDiv = ({ children }) => {
     const divRef = useRef(null);
 
-    setTimeout(() => {
-        divRef?.current?.classList.remove('active');
-    }, 5000);
+    pushNotif = (msg) => {
+        setContent(msg);
+    }
 
     useEffect(() => {
         setTimeout(() => {
-            divRef.current.classList.add('active');
+            divRef?.current?.classList.add('active');
+            divRef.current.style.animation = 'unset';
+            divRef.current.style.animation = null;
         }, 0);
-    }, [])
+        console.log('killing timeout', prevTimeout);
+        clearTimeout(prevTimeout);
+        prevTimeout = setTimeout(() => {
+            console.log('timout run: ', prevTimeout)
+            divRef?.current?.classList.remove('active');
+        }, 5000);
+        console.log('timout set: ', prevTimeout)
+    }, [content])
 
     return (
-        <div ref={divRef}>
-            {children}
+        <div id='notifCont'>
+            <div ref={divRef}>{content}</div>
         </div>
     )
 }
